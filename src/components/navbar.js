@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Navbar, Form, Button, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, InputGroup, Input } from 'reactstrap';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import indexPage from '../App'
+
+import homePage from './home'
 import playlistPage from './playlist'
 import userPage from './user.js'
 import aboutUsPage from './aboutUs'
@@ -32,7 +33,8 @@ const Example = (props) => {
             </Navbar>
           </div>
           <Switch>
-              <Route exact path = '/' component = {indexPage} />
+
+              <Route exact path = '/' component = {homePage} />
               <Route exact path = '/playlist' component = {playlistPage} />
               <Route exact path = '/user' component = {userPage} />
               <Route exact path = '/aboutus' component = {aboutUsPage} />
