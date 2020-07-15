@@ -66,3 +66,21 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+## Project Guidelines
+
+### Pull request guidelines
+
+1. When creating a pull request make sure that it is titled in the following way
+
+**[Issue Number] Description of pull request**
+
+For example if I was working on an issue related to adding a method to an api that had a ticket number 287 on Jira my pull request title would be
+
+**[287] Added the updateDB method to methods.js**
+
+
+2. **Never** merge your own pull request. This is bad practice to do so and could lead to issues in the code down the line
+
+3. Evey pull request must have at least one code review done before being merged
