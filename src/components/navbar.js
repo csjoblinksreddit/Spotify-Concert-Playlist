@@ -3,6 +3,7 @@ import { Navbar, Form, Button, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 import homePage from './home'
+
 import playlistPage from './playlist'
 import userPage from './user.js'
 import aboutUsPage from './aboutUs'
@@ -34,7 +35,8 @@ const Example = (props) => {
           </div>
           <Switch>
 
-              <Route exact path = '/' component = {homePage} />
+          <Route exact path = '/' component = {homePage} />
+
               <Route exact path = '/playlist' component = {playlistPage} />
               <Route exact path = '/user' component = {userPage} />
               <Route exact path = '/aboutus' component = {aboutUsPage} />
