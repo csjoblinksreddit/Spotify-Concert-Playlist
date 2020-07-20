@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, {Component} from 'react';
 import './Genres.css';
 import {Button, Input, Form} from 'reactstrap'
 import Artists from './Artists';
@@ -57,11 +57,6 @@ class Genres extends Component {
  
   render(){
     var{loaded, concerts} = this.state;
-
-    function Genre(name, id){
-      this.name = name;
-      this.id = id;
-    }
     if(!loaded)
     {
       console.log(concerts);
@@ -79,7 +74,7 @@ class Genres extends Component {
           //Add genre names and genreIDs
           genreSet.add(event.classifications[0].genre.name.concat("|".concat(event.classifications[0].genre.id)));
           //genreSet.add(event.classifications[0].subGenre.name.concat("|".concat(event.classifications[0].subGenre.id)));
-          
+
        });
 
       genreSet.forEach(genre => {

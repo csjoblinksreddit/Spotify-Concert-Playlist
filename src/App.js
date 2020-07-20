@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Genres from './components/Genres';
-import ZipForm from './components/ZipForm';
-import { Button } from 'reactstrap';
 
 require('dotenv').config();
-
 
 function App() {
   return (
@@ -28,8 +24,5 @@ function App() {
     </div>
   );
 }
-
-
-
 
 export default App;

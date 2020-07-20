@@ -17,7 +17,6 @@ class Artists extends Component{
     {
         const api_key = process.env.REACT_APP_API_KEY;
         const zipCode = this.props.zip;
-        const genreCodes = this.props.genreCodes;
         var genreString = "";
         this.props.genreCodes.forEach(genre => {
             genreString = genreString.concat(genre.concat(","));
@@ -76,15 +75,12 @@ class Artists extends Component{
             })
         }
         return <div className="App">
-                
-                    Choose your artists!
-                    
-                    <Form className="Artists" onSubmit={this.handleSubmit}>
-                        {artistCheckbox}
-                        <Button type="submit">Submit Artists</Button>
-                    </Form>
-    {this.state.isSubmitted && <div>{this.state.artists}</div>}
-                
+                Choose your artists!
+                <Form className="Artists" onSubmit={this.handleSubmit}>
+                    {artistCheckbox}
+                    <Button type="submit">Submit Artists</Button>
+                </Form>
+                {this.state.isSubmitted && <div>{this.state.artists}</div>}
             </div>
     }
 }

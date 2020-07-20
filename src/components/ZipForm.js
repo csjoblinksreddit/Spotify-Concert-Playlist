@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import Genres from './Genres';
 
 export default class ZipForm extends Component {
@@ -26,13 +26,10 @@ export default class ZipForm extends Component {
       <div className="App">
       Enter a zipcode
       <Form className ="ZipForm" onSubmit={this.handleSubmit}>
-
         <FormGroup>
           <Label for="zipcode"></Label>
             <Input type="text" value={this.state.zip} onChange={this.handleChange} id="zipcodeInput" placeholder="Enter Zipcode" />
         </FormGroup>
-      
-
       <Button type ="submit" value={this.state.zip} placeholder="submit">Submit</Button>
     </Form>
     {this.state.isSubmitted && <Genres zip = {this.state.zip}/>}
