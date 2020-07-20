@@ -76,14 +76,15 @@ class Artists extends Component{
             })
         }
         return <div className="App">
-                <header className="App-header">
+                
                     Choose your artists!
+                    
                     <Form className="Artists" onSubmit={this.handleSubmit}>
                         {artistCheckbox}
-                        <button type="submit">Submit Form</button>
+                        <Button type="submit">Submit Artists</Button>
                     </Form>
     {this.state.isSubmitted && <div>{this.state.artists}</div>}
-                </header>
+                
             </div>
     }
 }

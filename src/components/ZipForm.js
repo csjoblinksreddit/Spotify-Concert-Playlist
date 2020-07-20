@@ -23,7 +23,7 @@ export default class ZipForm extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="App">
       Enter a zipcode
       <Form className ="ZipForm" onSubmit={this.handleSubmit}>
 

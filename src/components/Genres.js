@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import './Genres.css';
-import {Input, Form} from 'reactstrap'
+import {Button, Input, Form} from 'reactstrap'
 import Artists from './Artists';
 
 class Genres extends Component {
@@ -94,15 +94,15 @@ class Genres extends Component {
       })
       return (
         <div className="App">
-          <header className="App-header">       
+                
             Choose your genres!
             <Form className="Genres" onSubmit={this.handleSubmit}>              
               {genreCheckboxes}
-              <button type="submit">Submit Form</button>
+              <Button type="submit">Submit Genres</Button>
             </Form>
             
             {this.state.isSubmitted && <Artists genreCodes= {this.state.genres} zip = {this.props.zip}/>}
-          </header>
+        
         </div>
       );
     }
