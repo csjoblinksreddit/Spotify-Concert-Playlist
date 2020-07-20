@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import './Genres.css';
-
-require('dotenv').config();
+import {Input, Form} from 'reactstrap'
+import Artists from './Artists';
 
 class Genres extends Component {
   constructor(props)
@@ -9,8 +9,12 @@ class Genres extends Component {
     super(props);
     this.state={
       loaded: false,
-      concerts: []
+      concerts: [],
+      isSubmitted: false,
+      genres: []
     };
+    this.handleToggle = this.handleToggle.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount(){
@@ -23,14 +27,41 @@ class Genres extends Component {
       res => res.json()).then(json => {
         this.setState({
           loaded: true,
-          concerts: json
+          concerts: json,
         })
       });
     
   }
+  handleSubmit = (event) =>{
+    console.log(this.state.genres);
+    this.setState({isSubmitted: true});
+    event.preventDefault();
+  }
+  handleToggle = (event) =>{
+    if(event.target.checked){
+      this.setState({
+        genres: [...this.state.genres, event.target.value]
+      });
+      this.setState({isSubmitted: false});
+    } else{
+      let remove = this.state.genres.indexOf(event.target.value);
+      this.setState({
+        genres: this.state.genres.filter((_,i) => i !== remove)
+      }, 
+        () => {
+          console.log('genres', this.state.genres);
+        });
+        this.setState({isSubmitted: false});
+    }
+  }
+ 
   render(){
     var{loaded, concerts} = this.state;
-    console.log(concerts.length);
+
+    function Genre(name, id){
+      this.name = name;
+      this.id = id;
+    }
     if(!loaded)
     {
       console.log(concerts);
@@ -40,31 +71,39 @@ class Genres extends Component {
       return <div>There are no concerts in your area</div>;
     }
     else{
-      const set1 = new Set();
-      concerts._embedded.events.map(event => (
-          set1.add(event.classifications[0].genre.name)
-       ));
-      concerts._embedded.events.map(event => (
-        set1.add(event.classifications[0].subGenre.name)
-      ));
-      const listItems2 = [];
+      const genreSet = new Set();
+      const genreCheckboxes = [];
+      
+      //Add all genres and subgenres to genreName and genreID set
+      concerts._embedded.events.map(event => {
+          //Add genre names and genreIDs
+          genreSet.add(event.classifications[0].genre.name.concat("|".concat(event.classifications[0].genre.id)));
+          //genreSet.add(event.classifications[0].subGenre.name.concat("|".concat(event.classifications[0].subGenre.id)));
+          
+       });
 
-      set1.forEach(genre => {
-        listItems2.push(<div><input type="checkbox" id={genre} name={genre} value={genre}></input><label for={genre}> {genre}</label></div>)
+      genreSet.forEach(genre => {
+        genreCheckboxes.push(<div>
+          <Input type="checkbox" 
+            id={genre.split("|")[0]} 
+            name={genre.split("|")[0]} 
+            value={genre.split("|")[1]}
+            onClick={this.handleToggle}/>
+             <label for={genre.split("|")[0]}> {genre.split("|")[0]}</label>
+          </div>)
       })
       return (
         <div className="App">
-          <header className="App-header">
+          <header className="App-header">       
+            Choose your genres!
+            <Form className="Genres" onSubmit={this.handleSubmit}>              
+              {genreCheckboxes}
+              <button type="submit">Submit Form</button>
+            </Form>
             
-            Select which genres you would like in your playlist
-            <form>              
-              {listItems2}
-            </form>
-            <br></br>
+            {this.state.isSubmitted && <Artists genreCodes= {this.state.genres} zip = {this.props.zip}/>}
           </header>
-          
         </div>
-        
       );
     }
   }   
