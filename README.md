@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## dotenv
+must create .env file in root folder with the ticketmaster api key 
+must also run "npm install dotenv" 
+
 ## Available Scripts
 
 In the project directory, you can run:
