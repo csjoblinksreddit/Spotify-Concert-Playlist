@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar, Form, Button, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, InputGroup, Input } from 'reactstrap';
-import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import homePage from './home'
 
@@ -19,11 +19,20 @@ const Example = (props) => {
         <div>
           <Navbar color='light' light expand='md'>
           <NavbarToggler onClick={toggle} className='mr-2' />
-            <NavbarBrand><Link to='/'>PLAYLISTAPP</Link></NavbarBrand>
+            <NavbarBrand href="/">PLAYLISTAPP</NavbarBrand>
               <Nav className='mr-auto' navbar tabs>
-                <NavItem><NavLink><Link to='/playlist'>PLAYLIST</Link></NavLink></NavItem>
-                <NavItem><NavLink><Link to='/user'>USER</Link></NavLink></NavItem>
-                <NavItem><NavLink><Link to='/aboutus'>ABOUT US</Link></NavLink></NavItem>
+              <NavItem>
+                  <NavLink href="/playlist">PLAYLIST</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/user">USER</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/aboutus">ABOUT</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="http://localhost:8888">LOGIN</NavLink>
+                </NavItem>
               </Nav>
               <Form inline>
                 <InputGroup>
