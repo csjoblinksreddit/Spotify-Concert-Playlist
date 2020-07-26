@@ -3,7 +3,7 @@ import { Navbar, Form, Button, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import homePage from './home'
-
+import concertPlaylist from './concertPlaylist'
 import playlistPage from './playlist'
 import userPage from './user.js'
 import aboutUsPage from './aboutUs'
@@ -21,8 +21,11 @@ const Example = (props) => {
           <NavbarToggler onClick={toggle} className='mr-2' />
             <NavbarBrand href="/">PLAYLISTAPP</NavbarBrand>
               <Nav className='mr-auto' navbar tabs>
-              <NavItem>
+                <NavItem>
                   <NavLink href="/playlist">PLAYLIST</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/concertPlaylist">CONCERT</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink href="/user">USER</NavLink>
@@ -43,9 +46,8 @@ const Example = (props) => {
             </Navbar>
           </div>
           <Switch>
-
-          <Route exact path = '/' component = {homePage} />
-
+              <Route exact path = '/' component = {homePage} />
+              <Route exact path = '/concertPlaylist' component = {concertPlaylist} />
               <Route exact path = '/playlist' component = {playlistPage} />
               <Route exact path = '/user' component = {userPage} />
               <Route exact path = '/aboutus' component = {aboutUsPage} />
