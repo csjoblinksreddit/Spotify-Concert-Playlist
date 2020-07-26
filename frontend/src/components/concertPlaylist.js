@@ -6,10 +6,9 @@ import 'antd/dist/antd.css';
 import '../styles/playlist.css'
 const { Search } = Input;
 
-let id = 'b4f4db01aebc4efeaaae5382e501af8b';
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
-spotifyApi.setAccessToken('BQD3VI6tcTYzV0f1fD3UwejIFAJ-OpY1y35zT2QtCJ1fidrqXNDjq1sX4ikmdTuMuBF7oQySyfCLGKEh7rEb4WHZIgnaGnpdXFvA8Mpx9eCW7SBirN9dHNcMHjqVZ5610QaNhoaZgBDYIXD2VVO_oc1EwjBHorP_zgTy8PzvrGwcdkbjAu1MrJf3rEkwsSY1jmD3Fg');
+spotifyApi.setAccessToken('');
 
 class Playlist extends Component {
   constructor(props) {
