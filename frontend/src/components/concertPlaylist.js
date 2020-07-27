@@ -13,7 +13,7 @@ var concertArtists = ['Frank Ocean', 'Kendrick Lamar', 'Dr. Dre'];
 
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
-spotifyApi.setAccessToken('BQCIDycIOXCJq6X4YmPzc_juULnKH3wiRYCFeult91DMMfzUUFagdkwvwi9ILH_w4teQ6L8PZiA1wgPBrNuX4HvwtH2X1H-lkDg3KALxPvALtJU9yMBU8dKjZl3M9kExtwdfiOcCqp7WA1pp6jYL5l1lO7p7LZ4fEF0DzmfpRwJ3y_d1xjzCe1G87WBY0m2bZAgS&refresh_token=AQBwiHMCoaplC886tWxFfzAIAxdIl5T_qMcNXhWysf2M26YmAh-I6uX25yuxJQ5_axdKgnJG7ZC1lJ3iTi5SEOnRxx59TQbUcWXWaMufUJzkfATDwq9Z5O3Khs6xoI5orE8');
+spotifyApi.setAccessToken('');
 
 class Playlist extends Component {
   constructor(props) {
