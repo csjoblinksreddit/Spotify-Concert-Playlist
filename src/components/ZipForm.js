@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import Genres from './Genres';
+import Genres from './genres/Genres';
 
 export default class ZipForm extends Component {
   constructor(props){

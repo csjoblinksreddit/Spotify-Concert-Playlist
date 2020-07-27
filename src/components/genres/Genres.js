@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './Genres.css';
 import {Button, Input, Form} from 'reactstrap'
-import Artists from './Artists';
+import Artists from '../Artists';
 
 class Genres extends Component {
   constructor(props)
