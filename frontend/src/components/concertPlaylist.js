@@ -8,7 +8,7 @@ const { Search } = Input;
 
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
-spotifyApi.setAccessToken('');
+spotifyApi.setAccessToken('BQD6ETs3w3Bep1VGnyaeEwB9U4smnFPKFrzghyJeZcKeEqCSaDT89ujbmLnzK4ET-m7X3cdlm8qiEP4rz8VrOnfF6B8z_bHpfr6WWs7T9GqPzrSKcb7BV_6fr5UWp_vBCu83ONZJQgHiMKmY3CtqDhCfml66IJdm8Toqc6v-27D4ZE4V1KjdvVWmLIRl3B40UsW5&refresh_token=AQC8LFBV3Aa3IrqtVrHY7F7nsFvkTxOSJnu9iIBVFpI1m5FIHFEsM8262A-KlCcuChI2swHvW4b-aSzVXVvW0-Pf2fNerNS0csGwoiUHz9uV0p4P3DquwgiFdk-iqJKP3do');
 
 class Playlist extends Component {
   constructor(props) {

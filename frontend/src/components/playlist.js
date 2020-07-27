@@ -20,6 +20,7 @@ class Playlist extends Component {
   addArtist = (artist, id) => {
     let gonnaBeAdded = [`${artist}`];
     let artistId = id;
+    console.log(id);
     this.setState({ 
         selectedArtists: this.state.selectedArtists.concat(gonnaBeAdded), // adding item to array
         artistId: this.state.artistId.concat(artistId) // adding item to array
