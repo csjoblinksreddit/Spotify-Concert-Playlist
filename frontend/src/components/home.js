@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
+import ZipForm from './ZipForm';
 const spotifyApi = new SpotifyWebApi();
 
 class Home extends Component {
@@ -56,7 +57,7 @@ class Home extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1>
-            HOME PAGE
+            <ZipForm/>
           </h1>
         </header>
       </div>
