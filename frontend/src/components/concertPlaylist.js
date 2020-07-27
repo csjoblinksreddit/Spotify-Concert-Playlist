@@ -6,10 +6,8 @@ import 'antd/dist/antd.css';
 import {Button, Form} from 'reactstrap'
 
 import '../styles/playlist.css'
+import CustomizePlaylist from './CustomizePlaylist';
 const { Search } = Input;
-
-//TO BE REPLACED WITH PROPS
-var concertArtists = ['Frank Ocean', 'Kendrick Lamar', 'Dr. Dre'];
 
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
@@ -24,7 +22,8 @@ class Playlist extends Component {
       artist: '',
       artistId: '',
       topTracks: [],
-      topTracksIds: [] 
+      topTracksIds: [],
+      isSubmitted: false
     }
   }
 
@@ -34,9 +33,7 @@ class Playlist extends Component {
     if(this.props.location.artists){
       this.props.location.artists.concertList.forEach(artist => this.searchArtist(artist));
     }
-    
   }
-
 
   sliceUserId = (url) => {
       let string = url.split(/[/?]/);
@@ -111,6 +108,7 @@ class Playlist extends Component {
   }
 
   addTracksToPlaylist = () => {
+      this.setState({isSubmitted: true})
       spotifyApi.addTracksToPlaylist(this.state.userPlaylistId, this.state.topTracksIds).then(
           (data) => {
               console.log(data)
@@ -135,7 +133,9 @@ class Playlist extends Component {
           </ul>
           {/*EDIT TO STOP MAKING REPEATED ARTIST ENTRIES*/}
           <Button placeholder="finalize playlist" onClick={this.addTracksToPlaylist}>Finalize!</Button>
+          {this.state.isSubmitted && <CustomizePlaylist playlistID = {this.state.userPlaylistId}/>}
         </header>
+        
       </div>
     );
   }

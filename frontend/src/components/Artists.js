@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {Button, Input, Form, Nav, NavLink} from 'reactstrap';
+import {Button, Input, Form} from 'reactstrap';
 import {Link} from "react-router-dom";
-import concertPlaylist from './concertPlaylist'
 
 class Artists extends Component{
     constructor(props){

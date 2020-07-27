@@ -58,6 +58,7 @@ class Home extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1>
             <ZipForm/>
+            
           </h1>
         </header>
       </div>
