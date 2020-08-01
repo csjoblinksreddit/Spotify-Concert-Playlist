@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
+import { Input } from 'antd';
 import 'antd/dist/antd.css';
+import {Button, Form} from 'reactstrap'
+
 import '../styles/playlist.css'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+const { Search } = Input;
+
+//TO BE REPLACED WITH PROPS
+var concertArtists = ['Frank Ocean', 'Kendrick Lamar', 'Dr. Dre'];
 
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
-spotifyApi.setAccessToken('BQD--_RsMQYo_2lONWrZ5pCpKii9TSZ_IFWQDSQwpVQWl22tqKRa4a5UZh-pPMOuv9upcMi42-jZS1YMDA2VKqEn7Fy3sb0XpUxaCdpTcXdULmoZAf_ZxqhceNp8BHa03XHSRcqfzrpaH2ShropaQYcRmDeoV5iy7WIhciRKpikwi1C8esEYRlr9GtXPSi7D3100sA');
+spotifyApi.setAccessToken('');
 
 class Playlist extends Component {
   constructor(props) {
@@ -22,6 +28,16 @@ class Playlist extends Component {
     }
   }
 
+  //ISSUE: MAKES A NEW PLAYLIST EVERY TIME PAGE IS REFRESHED
+  componentDidMount(){
+    this.getUser();
+    if(this.props.location.artists){
+      this.props.location.artists.concertList.forEach(artist => this.searchArtist(artist));
+    }
+    
+  }
+
+
   sliceUserId = (url) => {
       let string = url.split(/[/?]/);
       return string[5]
@@ -33,7 +49,8 @@ class Playlist extends Component {
             this.setState({
                 userId: this.sliceUserId(data.href)
             })
-
+            this.createPlaylist();
+            
         },
         (err) => {
         console.error(err);
@@ -42,6 +59,7 @@ class Playlist extends Component {
   }
 
   searchArtist = (artist) => {
+    console.log(artist);
     spotifyApi.searchArtists(artist).then(
         (data) => {
             if(data !== undefined) {
@@ -61,18 +79,17 @@ class Playlist extends Component {
   }
 
   getTopTracks = (artistId, country) => {
-      spotifyApi.getArtistTopTracks(artistId, country, {limit: 5}).then(
+      spotifyApi.getArtistTopTracks(artistId, country).then(
           (data) => {
             this.setState({
                 topTracks: data.tracks, // track info
             })
-            this.getAlbumTracks();
+            
             this.state.topTracks.map((track) => {
                 this.setState({
                     topTracksIds:this.state.topTracksIds.concat(track.uri) //storing track id's in an array
                 })
             })
-            this.getUser();
           },
           (err) => {
               console.log(err)
@@ -80,23 +97,12 @@ class Playlist extends Component {
       )
   }
 
-  getAlbumTracks = () => {
-    spotifyApi.getTrack('3wFGRek61NIF330UwJCI52').then(
-      (data) => {
-        console.log('data :')
-        console.log(data)
-      }, 
-      (err) => {console.log(err)}
-    )    
-  }
-
   createPlaylist = () => {
       spotifyApi.createPlaylist(this.state.userId, {name: 'playlistApp_000001', description: 'created with playlistApp'}).then(
           (data) => {
               this.setState({
                   userPlaylistId: data.id
-              })
-              this.addTracksToPlaylist();
+              })              
           },
           (err) => {
               console.log(err)
@@ -107,19 +113,12 @@ class Playlist extends Component {
   addTracksToPlaylist = () => {
       spotifyApi.addTracksToPlaylist(this.state.userPlaylistId, this.state.topTracksIds).then(
           (data) => {
-              console.log('tracks added ')
+              console.log(data)
           },
           (err) => {
               console.log(err)
           }
       )
-  }
-
-  trigger = () => {
-    console.log('triggered')
-  }
-  triggered = () => {
-    console.log('triggeredd')
   }
 
   render() {
@@ -128,19 +127,14 @@ class Playlist extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <div id="artistInput">
-          <Form>
-            <FormGroup>
-              <Label for="exampleEmail">Email</Label>
-              <Input type="text" name="email" id="exampleEmail" placeholder="with a placeholder" />
-            </FormGroup>
-            <Button onClick={this.trigger}>Submit</Button>
-            </Form>
+            <Search placeholder="input search text" onSearch={ value => this.searchArtist(value)} enterButton />
           </div>
           <ul>
             <li>{this.state.artist}</li>
             <li>{this.state.artistId}</li>
           </ul>
-          <Button onClick={this.triggered}>Submit</Button>
+          {/*EDIT TO STOP MAKING REPEATED ARTIST ENTRIES*/}
+          <Button placeholder="finalize playlist" onClick={this.addTracksToPlaylist}>Finalize!</Button>
         </header>
       </div>
     );

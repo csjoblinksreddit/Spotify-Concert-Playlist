@@ -4,11 +4,12 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import Navbar from './components/navbar'
+import NavBar from './components/newNavbar'
 
 
 ReactDOM.render(
   <React.StrictMode>
-      <Navbar />
+      <NavBar />
   </React.StrictMode>,
   document.getElementById('root')
 );

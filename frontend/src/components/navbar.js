@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar, Form, Button, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, InputGroup, Input } from 'reactstrap';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
+import '../styles/navbar.css' 
 import homePage from './home'
 import concertPlaylist from './concertPlaylist'
 import playlistPage from './playlist'
@@ -36,13 +36,7 @@ const Example = (props) => {
                 <NavItem>
                   <NavLink href="http://localhost:8888">LOGIN</NavLink>
                 </NavItem>
-              </Nav>
-              <Form inline>
-                <InputGroup>
-                    <Input placeholder = 'keyword'></Input>
-                </InputGroup>
-                <Button variant='outline-success'>Search</Button>
-              </Form>        
+              </Nav>       
             </Navbar>
           </div>
           <Switch>

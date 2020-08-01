@@ -1,0 +1,37 @@
+#artistInput {
+    display: flex; 
+}
+#artistInput > div:nth-child(2) { flex: 1; }
+
+
+#playlistPage-row {
+    margin-top: 350px;
+}
+
+#form-container {
+    margin-left: 300px;
+    width: 400px;
+}
+
+#searchArtist {
+    margin-bottom: 20px;
+    width: 300px;
+    height: 45px;
+}
+
+#searchArtist span {
+    height: 100%;
+}
+
+#searchArtist svg {
+    margin-top: 10px;
+}
+
+#pickArtists {
+    width: 100%;
+}
+
+#create-button {
+    margin-left: 50px;
+    height: 45px;
+}
