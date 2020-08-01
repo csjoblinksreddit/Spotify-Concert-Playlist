@@ -34,4 +34,12 @@
 #create-button {
     margin-left: 50px;
     height: 45px;
+    background-color: #48435C;
+    border-color: white;
+    font-weight: 600;
+    border-radius: 7px;
+}
+
+#create-button:hover {
+    background-color: #997799;
 }

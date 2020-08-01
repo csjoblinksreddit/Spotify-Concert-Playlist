@@ -1,29 +1,40 @@
 .navbarContainer #login {
-    margin-left: 950px;
+    margin-left: 900px;
 }
 
-.navbarContainer span > svg {
+
+.anticon svg {
     margin-top: -5px;
 }
 
-.ant-menu-item .ant-menu-item-active svg {
-    margin-top: -5px;
+.anticon svg path {
+    stroke: white;
+    stroke-width: 50px;
 }
 
 .navbarContainer ul {
     background-color: #48435C;
-    color:#02FE8F;
+    color:white;
 }
 .navbarContainer span a {
-    color:#02FE8F !important;
+    color:white !important;
+}
+
+.navbarContainer #dropDown {
+    font-weight: bold;
+}
+
+.navbarContainer span > a{
+    font-weight: bold;
 }
 
 .navbarContainer li:hover a{
-    color: white !important;
+    color:#02FE8F !important;
 }
 
 .navbarContainer li:hover svg{
-    color: white !important;
+    color:#02FE8F !important;
+    stroke: #02FE8F !important;
 }
 
 .navbarContainer li:hover {
@@ -32,5 +43,13 @@
 }
 
 .navbarContainer .ant-menu-submenu-title:hover {
-    color: white !important;
+    color:#02FE8F !important;
+}
+
+.ant-menu-item:hover, .ant-menu-item-active, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-submenu-active, .ant-menu-submenu-title:hover {
+    color: #02FE8F  !important;
+}
+
+.ant-menu-item a:hover {
+    color: #02FE8F !important;
 }
