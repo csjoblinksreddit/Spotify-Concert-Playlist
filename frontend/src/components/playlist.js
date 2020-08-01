@@ -7,7 +7,7 @@ import { Container, Row, Col } from 'reactstrap';
 const { Search } = Input;
 const { Option } = Select;
 
-let accessToken = 'BQDzA8qT-wDF1EeVOdFHskFLZciIbqveaDc6t-yHb9A7MhOnEZSDjQ-74jXzMDfvEVV9kUqnJ3DT5C-OtGkFhqWDMLV0bqol7K_UM1l67jNRIzhcrPwpuTXHVNWGycd5bxUFhAuKuNP7T6b7rA07jjXI4LHG8hqc6QqfKdtcbYGCOv1w2BQVPktWvN0qgttkMQ-NCA'
+let accessToken = 'BQC6c0vBe485ftSK1UK22oUGwA3COgoGtQuI1jDwVfrVWoggE9OxUd_aqqw33DBMhxhxDndwjuNXCjCESMoUa-V0t1RgdGg9YmDBogRk2zjMmlLNPAf-0cMlvypYJBe-6njTQ5XSNciO6kXll6EEtcUhPiRjBwUj200H2BBFz5gCuY3QwYpR6zaGGED9RD9U0O9lQw' 
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
 spotifyApi.setAccessToken(accessToken);

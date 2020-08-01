@@ -28,19 +28,19 @@ class NavBar extends React.Component {
     const { current } = this.state;
     return (
         <Router>
-            <div>
+            <div className="navbarContainer">
                 <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
-                    <Menu.Item key="home" icon={<HomeOutlined />}>
+                    <Menu.Item id="home" key="home" icon={<HomeOutlined />}>
                         <a href="/">Playlist Creator</a>
                     </Menu.Item>
                     <Menu.Item key="user" icon={<UserOutlined />}>
                         <a href="/user">User</a>
                     </Menu.Item>
-                    <SubMenu icon={<AppstoreAddOutlined />} title="Create Playlist">
-                        <Menu.Item key="concert" icon={<PlusOutlined />}> 
+                    <SubMenu id="dropDown" icon={<AppstoreAddOutlined />} title="Create Playlist">
+                        <Menu.Item key="concert" icon={<PlusOutlined />}>
                             <a href="/concertPlaylist">Concert Playlist</a>
                         </Menu.Item>
-                        <Menu.Item key="normal" icon={<PlusOutlined />}> 
+                        <Menu.Item key="normal" icon={<PlusOutlined />}>
                             <a href="/playlist">Normal Playlist</a>
                         </Menu.Item>
                     </SubMenu>

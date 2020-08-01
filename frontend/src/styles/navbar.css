@@ -1,0 +1,11 @@
+.navbarContainer #login {
+    margin-left: 950px;
+}
+
+.navbarContainer span > svg {
+    margin-top: -5px;
+}
+
+.ant-menu-item .ant-menu-item-active svg {
+    margin-top: -5px;
+}
