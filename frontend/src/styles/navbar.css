@@ -9,3 +9,28 @@
 .ant-menu-item .ant-menu-item-active svg {
     margin-top: -5px;
 }
+
+.navbarContainer ul {
+    background-color: #48435C;
+    color:#02FE8F;
+}
+.navbarContainer span a {
+    color:#02FE8F !important;
+}
+
+.navbarContainer li:hover a{
+    color: white !important;
+}
+
+.navbarContainer li:hover svg{
+    color: white !important;
+}
+
+.navbarContainer li:hover {
+    color: white !important;
+    border-bottom-color: #02FE8F !important;
+}
+
+.navbarContainer .ant-menu-submenu-title:hover {
+    color: white !important;
+}
