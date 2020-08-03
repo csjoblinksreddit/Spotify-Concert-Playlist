@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import '../App.css';
 import { Input, Button, Select } from 'antd';
+import { Container, Row, Col } from 'reactstrap';
 import 'antd/dist/antd.css';
 import '../styles/playlist.css'
-import { Container, Row, Col } from 'reactstrap';
-const { Search } = Input;
+import '../App.css';
+import Embedded from './embedded'
+
+
+const { Search, TextArea } = Input;
 const { Option } = Select;
 
-let accessToken = 'BQC6c0vBe485ftSK1UK22oUGwA3COgoGtQuI1jDwVfrVWoggE9OxUd_aqqw33DBMhxhxDndwjuNXCjCESMoUa-V0t1RgdGg9YmDBogRk2zjMmlLNPAf-0cMlvypYJBe-6njTQ5XSNciO6kXll6EEtcUhPiRjBwUj200H2BBFz5gCuY3QwYpR6zaGGED9RD9U0O9lQw' 
+let accessToken = 'BQAeNSSj5qivSXM1vd3YW0EThBMLNqYoRuZbNMC-M9hakndIhLgTaoVfP_mfY2J62YKhsc0mgOGVdSMUtWKGEWVSt2x_XhRdX5nrQyiAznmEOgCPZtzuYsPeUHcmgvwo1qBfM-xsK2IXQ2NsSAS_GnM9ZDsnKQm8B2pl0TPeHNAh7Ns3BUEcYnRc2OwUNIkmd8ShdQ'
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
 spotifyApi.setAccessToken(accessToken);
@@ -18,22 +21,24 @@ class Playlist extends Component {
     this.state={
       user: {
           id: '',
-          playlistId: ''
+          playlistId: '',
+          iframe:''
       },
       artist: {
           name: '',
           id: ''
       },
+      playlistName: 'Playlist App',
+      playlistDescription: 'Created with Playlist App',
       selectedArtists: [], 
       searchedArtists: [],
-      topTracksIds: [] 
+      topTracksIds: [],
+      displayPlaylist: 'none',
+      random: 0
     }
   }
 
   componentDidMount() {
-      this.setState({
-          topTracksIds: []
-      })
       this.getUser();
   }
 
@@ -60,7 +65,7 @@ class Playlist extends Component {
 
         (data) => {
             if(data !== undefined) {
-                this.setState({
+                this.setState({ // change to index 1 if query is same
                     searchedArtists: this.state.searchedArtists.concat(data.artists.items[0].name), // index is 0 because most popular query's index is 0 
                     selectedArtists: this.state.selectedArtists.concat(data.artists.items[0].name)
                 })
@@ -80,9 +85,10 @@ class Playlist extends Component {
                 if(data !== undefined) {
                     this.setState({
                         artist:{name: data.artists.items[0].name, id : data.artists.items[0].id}  // index is 0 because most popular query's index is 0 
-                    })
-                }
-               this.getTopTracks(this.state.artist.id, 'TR');
+                    }, () => {
+                        this.getTopTracks(this.state.artist.id, 'TR'); // a callback, will be executed after setting state
+                    });
+                }          
             },
             (err) => {
                 console.log(err)
@@ -92,33 +98,18 @@ class Playlist extends Component {
   }
 
 
-  getTopTracks = (artistId, country) => {
-      spotifyApi.getArtistTopTracks(artistId, country).then(
-          
+  getTopTracks = (artistId, country, addTracks) => {
+      spotifyApi.getArtistTopTracks(artistId, country).then(     
         (data) => {
             data.tracks.map((track) => {
                 this.setState({
                     topTracksIds:this.state.topTracksIds.concat(track.uri) //storing track id's in an array
                 })
             })
-            console.log(this.state.topTracksIds)
+
+            this.addTracksToPlaylist(this.state.user.playlistId, this.state.topTracksIds)
           },
 
-        (err) => {
-            console.log(err)
-        }
-      )
-  }
-
-
-  createPlaylist = (userId, name='playlistApp', description='created with playlistApp') => {
-      spotifyApi.createPlaylist(userId, {name, description}).then(
-        (data) => {
-            this.setState({
-                user: { playlistId: data.id } 
-            })
-            this.addTracksToPlaylist(this.state.user.playlistId, this.state.topTracksIds);
-        },
         (err) => {
             console.log(err)
         }
@@ -126,41 +117,94 @@ class Playlist extends Component {
   }
 
   addTracksToPlaylist = (playlistId, topTracksIds) => {
-      spotifyApi.addTracksToPlaylist(playlistId, topTracksIds).then(
-          (data) => {
-              console.log('playlist data: ' + data)
-              this.setState({
-                  topTracksIds: []
-              })
-          },
-          (err) => {
-              console.log(err)
-          }
+    spotifyApi.addTracksToPlaylist(playlistId, topTracksIds).then(
+        (data) => {
+          //this.resetIframe()
+        },
+        (err) => {
+            console.log(err)
+        }
+    )
+
+    this.setState({
+        topTracksIds: []
+    })
+  }
+
+
+  createPlaylist = (userId, name, description) => {
+      spotifyApi.createPlaylist(userId, {name, description}).then(
+        (data) => {
+
+            console.log('once' + this.state.user.id)
+            this.setState({
+                user: { id: userId ,playlistId: data.id, iframe: `https://open.spotify.com/embed/playlist/${data.id}` } 
+            }, () => {
+                console.log(this.state.user.id)
+                this.searchArtist(this.state.selectedArtists)
+            })
+            
+        },
+        (err) => {
+            console.log(err)
+            console.log(this.state.user.id)
+        }
       )
   }
+
 
   handleSelect = (value) => {
     this.setState({
         selectedArtists: this.state.selectedArtists.concat(value)
+    }, () => {
+        console.log(this.state.selectedArtists)
     }) 
-}
+  }
 
   handleDeselect = (value) => {
     this.setState({
         selectedArtists: this.state.selectedArtists.filter(name => !name.includes(value))
-    })
+    }, () => {
+        console.log(this.state.selectedArtists)
+    });
+
+
   }
 
   handleCreate = () => {
-    this.searchArtist(this.state.selectedArtists)
-    this.createPlaylist(this.state.user.id, 'yeni liste', 'açıklama');
+    this.createPlaylist(this.state.user.id, this.state.playlistName, this.state.playlistDescription);
+    this.setState({
+        displayPlaylist: 'block',
+      })
+
+    setTimeout(() => {
+        this.setState({ random: this.state.random + 1 })
+    }, 700);
+
+    setTimeout(() => {
+        this.setState({
+            selectedArtists: [],
+            topTracksIds: []
+        })
+    },3000)
   }
 
+  handleNameInput = (event) => {
+    this.setState({
+        playlistName: event.target.value
+    })
+  }
 
+  handleDescriptionInput = (event) => {
+    this.setState({
+        playlistDescription: event.target.value
+    })
+  }
 
   render() {
     return (
         <Container className="playlistPage-container">
+            {this.state.displayPlaylist !== 'none' ? <Row id="iframe-row"><Embedded key={this.state.random} link={this.state.user.iframe}/></Row> : ''}
             <Row id="playlistPage-row">
                 <Col>
                     <div id="form-container">
@@ -194,6 +238,10 @@ class Playlist extends Component {
                                 );
                             })}
                             </Select>
+                        </div>
+                        <div id="playlist-properties" style={{display: this.state.selectedArtists.length > 0 ? 'block' : 'none'}}>
+                            <Input id="name-input" onChange={this.handleNameInput} placeholder="Playlist Name" />
+                            <TextArea id="description-input" onChange={this.handleDescriptionInput} rows={3} /> 
                         </div>
                     </div>
                 </Col>
