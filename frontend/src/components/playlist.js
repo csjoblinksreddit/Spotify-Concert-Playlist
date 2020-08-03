@@ -10,7 +10,7 @@ import Embedded from './embedded'
 const { Search, TextArea } = Input;
 const { Option } = Select;
 
-let accessToken = 'BQAeNSSj5qivSXM1vd3YW0EThBMLNqYoRuZbNMC-M9hakndIhLgTaoVfP_mfY2J62YKhsc0mgOGVdSMUtWKGEWVSt2x_XhRdX5nrQyiAznmEOgCPZtzuYsPeUHcmgvwo1qBfM-xsK2IXQ2NsSAS_GnM9ZDsnKQm8B2pl0TPeHNAh7Ns3BUEcYnRc2OwUNIkmd8ShdQ'
+let accessToken = ''
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
 spotifyApi.setAccessToken(accessToken);
@@ -60,6 +60,7 @@ class Playlist extends Component {
     );
   }
 
+  //this is for showing the artist names before creating playlist
   getArtist = (artist) => {
     spotifyApi.searchArtists(artist).then(
 
@@ -78,6 +79,7 @@ class Playlist extends Component {
     );
   }
 
+  //this is for creating playlist
   searchArtist = (artist) => {
     artist.map((artistName, key) => {
         spotifyApi.searchArtists(artistName).then(
@@ -98,6 +100,7 @@ class Playlist extends Component {
   }
 
 
+  //tracks that we are going to add to playlist
   getTopTracks = (artistId, country, addTracks) => {
       spotifyApi.getArtistTopTracks(artistId, country).then(     
         (data) => {
@@ -140,14 +143,12 @@ class Playlist extends Component {
             this.setState({
                 user: { id: userId ,playlistId: data.id, iframe: `https://open.spotify.com/embed/playlist/${data.id}` } 
             }, () => {
-                console.log(this.state.user.id)
                 this.searchArtist(this.state.selectedArtists)
             })
             
         },
         (err) => {
             console.log(err)
-            console.log(this.state.user.id)
         }
       )
   }
@@ -177,11 +178,11 @@ class Playlist extends Component {
         displayPlaylist: 'block',
       })
 
-    setTimeout(() => {
+    setTimeout(() => { // iframe needs a reload to show songs
         this.setState({ random: this.state.random + 1 })
     }, 700);
 
-    setTimeout(() => {
+    setTimeout(() => { // selected songs dissapear 
         this.setState({
             selectedArtists: [],
             topTracksIds: []
