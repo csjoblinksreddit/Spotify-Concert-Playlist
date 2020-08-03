@@ -167,6 +167,7 @@ class Playlist extends Component {
                         <div id="artistInput">
                             <div id="searchArtist">
                                 <Search
+                                    id="searchArtistInput"
                                     placeholder="Search Artist"
                                     onSearch={ value => this.getArtist(value)}
                                 />

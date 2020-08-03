@@ -34,7 +34,7 @@
 #create-button {
     margin-left: 50px;
     height: 45px;
-    background-color: #48435C;
+    background-color: #362b69;
     border-color: white;
     font-weight: 600;
     border-radius: 7px;
@@ -42,4 +42,19 @@
 
 #create-button:hover {
     background-color: #997799;
+}
+
+.ant-input-affix-wrapper:hover {
+    border-color: #997799 !important;
+    box-shadow: none;
+}
+
+.ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused {
+    border-color: #997799 !important;
+    box-shadow: none;
+}
+
+#searchArtistInput {
+    font-weight: 500;
+    color: #5A5766;
 }
