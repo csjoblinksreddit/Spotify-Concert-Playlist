@@ -10,31 +10,33 @@ class Home extends Component {
     super();
     const params = this.getHashParams();
     const token = params.access_token;
+    localStorage.setItem('token', token);
     if (token) {
       spotifyApi.setAccessToken(token);
     }
   }
   componentDidMount() {
+    console.log(spotifyApi.getAccessToken());
 
-    if (spotifyApi.getAccessToken()) {
-      /*TODO:
-       This method needs to be changed to create a playlist. At the moment 
-       it gets what currently playing and sets it to the state object
-      */
-      spotifyApi.getMyCurrentPlaybackState()
-        .then((response) => {
-          console.log(response.item)
-          if(response){
-            this.setState({
-              nowPlaying: {
-                name: response.item.name,
-                albumArt: response.item.album.images[0].url
-              }
-            });
-          }
+    // if (spotifyApi.getAccessToken()) {
+    //   /*TODO:
+    //    This method needs to be changed to create a playlist. At the moment 
+    //    it gets what currently playing and sets it to the state object
+    //   */
+    //   spotifyApi.getMyCurrentPlaybackState()
+    //     .then((response) => {
+    //       console.log(response.item)
+    //       if(response){
+    //         this.setState({
+    //           nowPlaying: {
+    //             name: response.item.name,
+    //             albumArt: response.item.album.images[0].url
+    //           }
+    //         });
+    //       }
           
-        })
-    }
+    //     })
+    // }
 
   }
 

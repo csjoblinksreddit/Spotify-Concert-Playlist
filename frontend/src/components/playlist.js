@@ -5,18 +5,19 @@ import 'antd/dist/antd.css';
 import '../styles/playlist.css'
 import '../App.css';
 import Embedded from './embedded'
+import SpotifyWebApi from 'spotify-web-api-js';
+const spotifyApi = new SpotifyWebApi();
 
 
 const { Search, TextArea } = Input;
 const { Option } = Select;
 
-let accessToken = ''
-let Spotify = require('spotify-web-api-js');
-let spotifyApi = new Spotify();
-spotifyApi.setAccessToken(accessToken);
-
-class Playlist extends Component {
+class Playlist extends Component {  
   constructor(props) {
+    if (    localStorage.getItem('token')) {
+        console.log(localStorage.getItem('token'))
+        spotifyApi.setAccessToken(localStorage.getItem('token'));
+    }
     super(props);
     this.state={
       user: {
