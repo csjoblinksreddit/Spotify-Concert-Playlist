@@ -12,6 +12,7 @@ class Home extends Component {
     const token = params.access_token;
     if (token) {
       spotifyApi.setAccessToken(token);
+
     }
   }
   componentDidMount() {
