@@ -38,7 +38,7 @@ class NavBar extends React.Component {
                     </Menu.Item>
                     <SubMenu id="dropDown" icon={<AppstoreAddOutlined />} title="Create Playlist">
                         <Menu.Item key="concert" icon={<PlusOutlined />}>
-                            <a href="/concertPlaylist">Concert Playlist</a>
+                            <a href="/playlist">Concert Playlist</a>
                         </Menu.Item>
                         <Menu.Item key="normal" icon={<PlusOutlined />}>
                             <a href="/playlist">Normal Playlist</a>
@@ -57,7 +57,6 @@ class NavBar extends React.Component {
             </div>
             <Switch>
               <Route exact path = '/' component = {homePage} />
-              <Route exact path = '/concertPlaylist' component = {concertPlaylist} />
               <Route exact path = '/playlist' component = {playlistPage} />
               <Route exact path = '/user' component = {userPage} />
               <Route exact path = '/aboutUs' component = {aboutUsPage} />
