@@ -58,7 +58,6 @@ class NavBar extends React.Component {
             </div>
             <Switch>
               <Route exact path = '/' component = {homePage} />
-              <Route exact path = '/concertPlaylist' component = {concertPlaylist} />
               <Route exact path = '/playlist' component = {playlistPage} />
               <Route exact path = '/user' component = {userPage} />
               <Route exact path = '/aboutUs' component = {aboutUsPage} />
