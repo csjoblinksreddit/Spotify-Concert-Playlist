@@ -7,7 +7,6 @@ import { QuestionOutlined, GithubOutlined, HomeOutlined, UserOutlined, LoginOutl
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import '../styles/navbar.css' 
 import homePage from './home'
-import concertPlaylist from './concertPlaylist'
 import playlistPage from './playlist'
 import userPage from './user.js'
 import aboutUsPage from './aboutUs'
