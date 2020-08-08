@@ -2,11 +2,9 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Menu } from 'antd';
 import { QuestionOutlined, GithubOutlined, HomeOutlined, UserOutlined, LoginOutlined, PlusOutlined, AppstoreAddOutlined } from '@ant-design/icons';
-
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import '../styles/navbar.css' 
 import homePage from './home'
-import concertPlaylist from './concertPlaylist'
 import playlistPage from './playlist'
 import userPage from './user.js'
 import aboutUsPage from './aboutUs'

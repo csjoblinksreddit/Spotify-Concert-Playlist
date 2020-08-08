@@ -16,7 +16,6 @@ class Home extends Component {
     }
   }
   componentDidMount() {
-
     if (spotifyApi.getAccessToken()) {
       /*TODO:
        This method needs to be changed to create a playlist. At the moment 
