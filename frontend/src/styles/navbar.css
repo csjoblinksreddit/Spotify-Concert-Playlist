@@ -63,3 +63,21 @@
     border-bottom: 2px solid #02FE8F !important;
 }
 
+.ant-menu-item::selection {
+    background: #02FE8F !important;
+}
+
+.ant-menu-item a::selection {
+    background: #02FE8F !important;
+}
+
+.ant-menu-item a:active {
+    background: #02FE8F !important;
+}
+
+.ant-menu-item-selected {
+    color: #02FE8F !important;
+}
+.ant-menu-horizontal > .ant-menu-item-selected a {
+    color: #02FE8F !important;
+}
