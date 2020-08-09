@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import { Input, Button, Select } from 'antd';
 import { Container, Row, Col } from 'reactstrap';
+import Embedded from './embedded'
+import SpotifyWebApi from 'spotify-web-api-js';
+import { decode } from '../scripts/encoder'
 import 'antd/dist/antd.css';
 import '../styles/playlist.css'
 import '../App.css';
-import Embedded from './embedded'
-import SpotifyWebApi from 'spotify-web-api-js';
-const spotifyApi = new SpotifyWebApi();
 
+
+const spotifyApi = new SpotifyWebApi();
 
 const { Search, TextArea } = Input;
 const { Option } = Select;
 
 class Playlist extends Component {  
   constructor(props) {
-    if (    localStorage.getItem('token')) {
-        console.log(localStorage.getItem('token'))
-        spotifyApi.setAccessToken(localStorage.getItem('token'));
+    if (localStorage.getItem('token') && localStorage.getItem('key')) {
+        let token = localStorage.getItem('token');
+        let key = localStorage.getItem('key');
+        let decryptedToken = decode(token, key);
+        spotifyApi.setAccessToken(decryptedToken);
     }
     super(props);
     this.state={

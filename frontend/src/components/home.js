@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
+import {encode, decode} from '../scripts/encoder'
+import createRandomString from '../scripts/randomString'
+
 const spotifyApi = new SpotifyWebApi();
 
 class Home extends Component {
@@ -10,9 +13,16 @@ class Home extends Component {
     super();
     const params = this.getHashParams();
     const token = params.access_token;
-    localStorage.setItem('token', token);
-    if (token) {
-      spotifyApi.setAccessToken(token);
+    
+    let key = createRandomString(15);
+    let encryptedToken = encode(token, key);
+    
+    localStorage.setItem('token', encryptedToken);
+    localStorage.setItem('key', key);
+
+    if (encryptedToken) {
+      const decryptedToken = decode(encryptedToken, key)
+      spotifyApi.setAccessToken(decryptedToken);
     }
   }
   componentDidMount() {

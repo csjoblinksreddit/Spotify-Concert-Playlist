@@ -8,7 +8,6 @@ import '../styles/navbar.css'
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import homePage from './home'
-import concertPlaylist from './concertPlaylist'
 import playlistPage from './playlist'
 import userPage from './user.js'
 import aboutUsPage from './aboutUs'
@@ -61,7 +60,6 @@ class NavBar extends React.Component {
                 </div>
                 <Switch>
                     <Route exact path = '/' component = {homePage} />
-                    <Route exact path = '/concertPlaylist' component = {concertPlaylist} />
                     <Route exact path = '/playlist' component = {playlistPage} />
                     <Route exact path = '/user' component = {userPage} />
                     <Route exact path = '/aboutUs' component = {aboutUsPage} />
