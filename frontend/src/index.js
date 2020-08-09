@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
-import Navbar from './components/navbar'
+import App from './App'
+
 
 
 ReactDOM.render(
   <React.StrictMode>
-      <Navbar />
+      <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

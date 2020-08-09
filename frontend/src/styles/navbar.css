@@ -1,0 +1,83 @@
+.navbarContainer #login {
+    margin-left: 700px;
+}
+
+
+.anticon svg {
+    margin-top: -7px;
+}
+
+.anticon svg path {
+    stroke: white;
+    stroke-width: 7px;
+}
+
+.navbarContainer ul {
+    background-color: #362b69;
+    color:white;
+    height: 55px;
+}
+
+.navbarContainer .ant-menu-item {
+    margin-top: 5.4px !important;
+}
+.navbarContainer span a {
+    color:white !important;
+}
+
+.navbarContainer #dropDown {
+    font-weight: 500;
+}
+
+.navbarContainer span > a{
+    font-weight: 500;
+}
+
+.navbarContainer li:hover a{
+    color:#02FE8F !important;
+}
+
+.navbarContainer li:hover svg{
+    color:#02FE8F !important;
+    stroke: #02FE8F !important;
+}
+
+.navbarContainer li:hover {
+    color: white !important;
+    border-bottom-color: #02FE8F !important;
+}
+
+.navbarContainer .ant-menu-submenu-title:hover {
+    color:#02FE8F !important;
+}
+
+.ant-menu-item:hover, .ant-menu-item-active, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-submenu-active, .ant-menu-submenu-title:hover {
+    color: #02FE8F  !important;
+}
+
+.ant-menu-item a:hover {
+    color: #02FE8F !important;
+}
+
+.ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected {
+    border-bottom: 2px solid #02FE8F !important;
+}
+
+.ant-menu-item::selection {
+    background: #02FE8F !important;
+}
+
+.ant-menu-item a::selection {
+    background: #02FE8F !important;
+}
+
+.ant-menu-item a:active {
+    background: #02FE8F !important;
+}
+
+.ant-menu-item-selected {
+    color: #02FE8F !important;
+}
+.ant-menu-horizontal > .ant-menu-item-selected a {
+    color: #02FE8F !important;
+}
