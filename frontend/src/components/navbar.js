@@ -1,9 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { Menu } from 'antd';
 import { QuestionOutlined, GithubOutlined, HomeOutlined, UserOutlined, LoginOutlined, PlusOutlined, AppstoreAddOutlined } from '@ant-design/icons';
-
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import '../styles/navbar.css' 
 import homePage from './home'
@@ -14,14 +12,18 @@ import aboutUsPage from './aboutUs'
 const { SubMenu } = Menu;
 
 class NavBar extends React.Component {
-  state = {
-    current: 'mail',
-  };
 
-  handleClick = e => {
-    console.log('click ', e);
-    this.setState({ current: e.key });
-  };
+    constructor(props) {
+        super(props);
+        this.state = {
+            current: 'mail',
+            };
+    }
+
+    handleClick = e => {
+        console.log('click ', e);
+        this.setState({ current: e.key });
+    };
 
   render() {
     const { current } = this.state;
