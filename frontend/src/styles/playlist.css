@@ -43,7 +43,7 @@
 }
 
 #create-button:hover {
-    background-color: #997799;
+    background-color: rgba(153, 119, 153, 0.7);
 }
 
 .ant-input-affix-wrapper:hover {
@@ -72,6 +72,11 @@
 #pickArtists .ant-select-selector:hover{
     border-color: #997799 !important;
     box-shadow: none;
+    cursor: pointer;
+}
+
+#pickArtists .ant-select-selection-placeholder:hover {
+    cursor: pointer;
 }
 
 #playlist-properties {
@@ -84,17 +89,55 @@
     margin-bottom: 25px;
     margin-top: 25px;
     margin-left: 25px;
+    box-shadow: none;
 }
 
 #name-input:hover {
     border-color: #997799 !important;
 }
 
+#name-input:focus {
+    border-color: #997799 !important;
+}
+
 #description-input:hover {
     border-color: #997799 !important;
-    box-shadow: none;
+    box-shadow: none !important;
+}
+
+#description-input:focus {
+    border-color: #997799 !important;
+    box-shadow: none !important;
 }
 
 #description-input {
     width: 300px 
+}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, textarea:-webkit-autofill, textarea:-webkit-autofill:hover, textarea:-webkit-autofill:focus, select:-webkit-autofill, select:-webkit-autofill:hover, select:-webkit-autofill:focus {
+    -webkit-text-fill-color: black;
+    -webkit-box-shadow: 0 0 0px 1000px 000 inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    background-color: rgba(153, 119, 153, 0.2) !important;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) .ant-select-item-option-state {
+    color: #646363;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    color: #646363;
+}
+
+.ant-select-focused.ant-select-multiple .ant-select-selector {
+    border-color: #997799 !important;
+    box-shadow: none !important;
+}
+
+.ant-select-multiple .ant-select-selection-item {
+    background-color: rgba(2, 254, 143, 0.1);
 }
