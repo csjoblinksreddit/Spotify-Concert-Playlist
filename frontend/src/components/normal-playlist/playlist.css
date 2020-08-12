@@ -49,6 +49,10 @@
     box-shadow: none;
 }
 
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+    color: #02FE8F !important;
+}
+
 .ant-input:hover {
     border-color: #997799 !important;
 }
