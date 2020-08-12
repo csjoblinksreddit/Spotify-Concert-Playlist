@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import { Input, Button, Select } from 'antd';
 import { Container, Row, Col } from 'reactstrap';
 import 'antd/dist/antd.css';
-import '../styles/playlist.css'
-import '../App.css';
-import Embedded from './embedded'
+import './playlist.css'
+import EmbeddedPlaylist from '../embedded-playlist/embeddedPlaylist'
 
 
 const { Search, TextArea } = Input;
 const { Option } = Select;
 
-let accessToken = ''
+let accessToken = 'BQCl5sJuGpHz5KolrkJ5-UPQV6msnImKa3wRtTzV9HhHsbbTfTzvSdX6uxp0U1Z_NLZxwrUXKm4WOP23AUSEvaWL6ZtsTD9HlEsGgwQbR3LtP9cVSY4yQGvUTTMy4UNxjOeCJWi13-n1k4s5fPHmzPgjCekBOkP2WBg3Utr65dm1ZSM8vLss8DYnqLZhP_TTtkARXg'
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
 spotifyApi.setAccessToken(accessToken);
@@ -42,11 +41,6 @@ class Playlist extends Component {
       this.getUser();
   }
 
-  sliceUserId = (url) => {
-      let string = url.split(/[/?]/);
-      return string[5]
-  }
-
   getUser = () => {
       spotifyApi.getUserPlaylists().then(
         (data) => {
@@ -58,6 +52,11 @@ class Playlist extends Component {
         console.error(err);
         }
     );
+  }
+  
+  sliceUserId = (url) => {
+    let string = url.split(/[/?]/);
+    return string[5]
   }
 
   //this is for showing the artist names before creating playlist
@@ -134,26 +133,6 @@ class Playlist extends Component {
     })
   }
 
-
-  createPlaylist = (userId, name, description) => {
-      spotifyApi.createPlaylist(userId, {name, description}).then(
-        (data) => {
-
-            console.log('once' + this.state.user.id)
-            this.setState({
-                user: { id: userId ,playlistId: data.id, iframe: `https://open.spotify.com/embed/playlist/${data.id}` } 
-            }, () => {
-                this.searchArtist(this.state.selectedArtists)
-            })
-            
-        },
-        (err) => {
-            console.log(err)
-        }
-      )
-  }
-
-
   handleSelect = (value) => {
     this.setState({
         selectedArtists: this.state.selectedArtists.concat(value)
@@ -190,6 +169,24 @@ class Playlist extends Component {
     },3000)
   }
 
+  createPlaylist = (userId, name, description) => {
+    spotifyApi.createPlaylist(userId, {name, description}).then(
+      (data) => {
+
+          console.log('once' + this.state.user.id)
+          this.setState({
+              user: { id: userId ,playlistId: data.id, iframe: `https://open.spotify.com/embed/playlist/${data.id}` } 
+          }, () => {
+              this.searchArtist(this.state.selectedArtists)
+          })
+          
+      },
+      (err) => {
+          console.log(err)
+      }
+    )
+  }
+
   handleNameInput = (event) => {
     this.setState({
         playlistName: event.target.value
@@ -205,7 +202,7 @@ class Playlist extends Component {
   render() {
     return (
         <Container className="playlistPage-container">
-            {this.state.displayPlaylist !== 'none' ? <Row id="iframe-row"><Embedded key={this.state.random} link={this.state.user.iframe}/></Row> : ''}
+            {this.state.displayPlaylist !== 'none' ? <Row id="iframe-row"><EmbeddedPlaylist key={this.state.random} link={this.state.user.iframe}/></Row> : ''}
             <Row id="playlistPage-row">
                 <Col>
                     <div id="form-container">
@@ -215,9 +212,10 @@ class Playlist extends Component {
                                     id="searchArtistInput"
                                     placeholder="Search Artist"
                                     onSearch={ value => this.getArtist(value)}
+                                    enterButton
                                 />
                             </div>
-                            <Button id ="create-button" type="primary" onClick={this.handleCreate}> Create Playlist </Button>
+                            <Button style={{display: this.state.selectedArtists.length > 0 ? 'block' : 'none'}} id ="create-button" type="primary" onClick={this.handleCreate}> Create Playlist </Button>
                         </div>
                         <div id="pickArtists">
                             <Select

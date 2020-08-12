@@ -1,7 +1,7 @@
 import React from 'react';
 import Iframe from 'react-iframe'
 
-const Embedded = (props) => {
+const EmbeddedPlaylist = (props) => {
     return(
         <div id="iframe-container">
                 <Iframe
@@ -16,4 +16,4 @@ const Embedded = (props) => {
     )
 }
 
-export default Embedded
+export default EmbeddedPlaylist

@@ -21,14 +21,6 @@
     height: 45px;
 }
 
-#searchArtist span {
-    height: 100%;
-}
-
-#searchArtist svg {
-    margin-top: 10px;
-}
-
 #pickArtists {
     width: 100%;
 }
@@ -46,6 +38,21 @@
     background-color: rgba(153, 119, 153, 0.7);
 }
 
+.ant-btn-primary {
+    background-color: #997799 !important;
+    border-color: #997799 !important;
+    height: 100%;
+}
+
+.ant-input-search-enter-button input:hover, .ant-input-search-enter-button input:focus {
+    border-color: #997799 !important;
+    box-shadow: none;
+}
+
+.ant-input:hover {
+    border-color: #997799 !important;
+}
+
 .ant-input-affix-wrapper:hover {
     border-color: #997799 !important;
     box-shadow: none;
@@ -59,6 +66,15 @@
 #searchArtistInput {
     font-weight: 500;
     color: #5A5766;
+    height: 100%;
+}
+
+.ant-input-group-wrapper {
+    height: 100%;
+}
+
+.ant-input-group {
+    height: 100%;
 }
 
 #iframe-row {
