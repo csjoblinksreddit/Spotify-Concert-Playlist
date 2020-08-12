@@ -3,11 +3,11 @@ import 'antd/dist/antd.css';
 import { Menu } from 'antd';
 import { QuestionOutlined, GithubOutlined, HomeOutlined, UserOutlined, LoginOutlined, PlusOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import './navbar.css'
-import homePage from '../home'
-import playlistPage from '../normal-playlist/playlist'
-import userPage from '../user.js'
-import aboutUsPage from '../aboutUs'
+import '../styles/navbar.css' 
+import homePage from './home'
+import playlistPage from './playlist'
+import userPage from './user.js'
+import aboutUsPage from './aboutUs'
 
 const { SubMenu } = Menu;
 
