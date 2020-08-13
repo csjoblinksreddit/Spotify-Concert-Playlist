@@ -100,7 +100,7 @@ class Playlist extends Component {
 
 
   //tracks that we are going to add to playlist
-  getTopTracks = (artistId, country, addTracks) => {
+  getTopTracks = (artistId, country) => {
       spotifyApi.getArtistTopTracks(artistId, country).then(     
         (data) => {
             data.tracks.map((track) => {
@@ -170,6 +170,10 @@ class Playlist extends Component {
   }
 
   createPlaylist = (userId, name, description) => {
+    if(name === undefined || description === undefined) {
+        name = 'Playlist App';
+        description= 'Created with Playlist App!'
+    }
     spotifyApi.createPlaylist(userId, {name, description}).then(
       (data) => {
 
