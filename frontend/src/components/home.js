@@ -12,10 +12,10 @@ class Home extends Component {
     const token = params.access_token;
     if (token) {
       spotifyApi.setAccessToken(token);
+
     }
   }
   componentDidMount() {
-
     if (spotifyApi.getAccessToken()) {
       /*TODO:
        This method needs to be changed to create a playlist. At the moment 
