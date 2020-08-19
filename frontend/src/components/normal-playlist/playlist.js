@@ -170,10 +170,13 @@ class Playlist extends Component {
   }
 
   createPlaylist = (userId, name, description) => {
-    if(name === undefined || description === undefined) {
+    if(!name.length > 0) {
         name = 'Playlist App';
-        description= 'Created with Playlist App!'
     }
+    if(!description.length > 0) {
+        description = 'Created with Playlist App'
+    }
+    
     spotifyApi.createPlaylist(userId, {name, description}).then(
       (data) => {
 
