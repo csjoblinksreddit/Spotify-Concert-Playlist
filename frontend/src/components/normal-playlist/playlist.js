@@ -9,7 +9,7 @@ import EmbeddedPlaylist from '../embedded-playlist/embeddedPlaylist'
 const { Search, TextArea } = Input;
 const { Option } = Select;
 
-let accessToken = 'BQC_KJbxXOJauoCnI7R9zUrt8QAC37YXsqlSYzL3kqt_B2exQvc8BN42oH5U4PeA3jC3mMlrWeINvdP8TOYGrVSOLn74bj-wkWxx4adpEGiZygQSXolZjk43LfKvsFUlDD-WRNpMtFQOlMAQh_fpE1Ewjq1HU8d14QBOgW6Gpri6H9xK8lno95f4-UB_Z9Mwi9m-Ng'
+let accessToken = ''
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
 spotifyApi.setAccessToken(accessToken);
