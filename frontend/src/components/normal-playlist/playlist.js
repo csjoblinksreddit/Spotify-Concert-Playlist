@@ -67,10 +67,9 @@ class Playlist extends Component {
         (data) => {
             if(data !== undefined) {
                 for(let i = 0; i < data.artists.items.length; i++) {
-                    console.log(data.artists.items)
                     if(!this.state.searchedArtists.includes(data.artists.items[i].name)) {
                         this.setState({ // change to index 1 if query is same
-                            searchedArtists: this.state.searchedArtists.concat(data.artists.items[i].name), // index is 0 because most popular query's index is 0 
+                            searchedArtists: this.state.searchedArtists.concat(data.artists.items[i].name),
                             selectedArtists: this.state.selectedArtists.concat(data.artists.items[i].name)
                         })
                         break;
