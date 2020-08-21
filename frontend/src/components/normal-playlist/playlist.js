@@ -9,7 +9,7 @@ import EmbeddedPlaylist from '../embedded-playlist/embeddedPlaylist'
 const { Search, TextArea } = Input;
 const { Option } = Select;
 
-let accessToken = ''
+let accessToken = 'BQC_KJbxXOJauoCnI7R9zUrt8QAC37YXsqlSYzL3kqt_B2exQvc8BN42oH5U4PeA3jC3mMlrWeINvdP8TOYGrVSOLn74bj-wkWxx4adpEGiZygQSXolZjk43LfKvsFUlDD-WRNpMtFQOlMAQh_fpE1Ewjq1HU8d14QBOgW6Gpri6H9xK8lno95f4-UB_Z9Mwi9m-Ng'
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
 spotifyApi.setAccessToken(accessToken);
@@ -60,15 +60,22 @@ class Playlist extends Component {
   }
 
   //this is for showing the artist names before creating playlist
+  //if(this.state.searchedArtists.includes(data.artists.items[0].name))
   getArtist = (artist) => {
     spotifyApi.searchArtists(artist).then(
 
         (data) => {
             if(data !== undefined) {
-                this.setState({ // change to index 1 if query is same
-                    searchedArtists: this.state.searchedArtists.concat(data.artists.items[0].name), // index is 0 because most popular query's index is 0 
-                    selectedArtists: this.state.selectedArtists.concat(data.artists.items[0].name)
-                })
+                for(let i = 0; i < data.artists.items.length; i++) {
+                    console.log(data.artists.items)
+                    if(!this.state.searchedArtists.includes(data.artists.items[i].name)) {
+                        this.setState({ // change to index 1 if query is same
+                            searchedArtists: this.state.searchedArtists.concat(data.artists.items[i].name), // index is 0 because most popular query's index is 0 
+                            selectedArtists: this.state.selectedArtists.concat(data.artists.items[i].name)
+                        })
+                        break;
+                    }
+                }
             }
         },
 
