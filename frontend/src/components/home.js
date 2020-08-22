@@ -2,54 +2,33 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
-import {encode, decode} from '../scripts/encoder'
-import createRandomString from '../scripts/randomString'
-
 const spotifyApi = new SpotifyWebApi();
-
+let refresh_token;
 class Home extends Component {
-
   constructor() {
     super();
     const params = this.getHashParams();
     const token = params.access_token;
-    
-    let key = createRandomString(15);
-    let encryptedToken = encode(token, key);
-    
-    localStorage.setItem('token', encryptedToken);
-    localStorage.setItem('key', key);
-
-    if (encryptedToken) {
-      const decryptedToken = decode(encryptedToken, key)
-      spotifyApi.setAccessToken(decryptedToken);
+    refresh_token = params.refresh_token;
+    if (token) {
+      spotifyApi.setAccessToken(token);
+    }
+    if(refresh_token){
+      console.log(refresh_token)
     }
   }
   componentDidMount() {
-    console.log(spotifyApi.getAccessToken());
-
-    // if (spotifyApi.getAccessToken()) {
-    //   /*TODO:
-    //    This method needs to be changed to create a playlist. At the moment 
-    //    it gets what currently playing and sets it to the state object
-    //   */
-    //   spotifyApi.getMyCurrentPlaybackState()
-    //     .then((response) => {
-    //       console.log(response.item)
-    //       if(response){
-    //         this.setState({
-    //           nowPlaying: {
-    //             name: response.item.name,
-    //             albumArt: response.item.album.images[0].url
-    //           }
-    //         });
-    //       }
-          
-    //     })
-    // }
-
+    if (refresh_token) {
+      /*TODO:
+       This method needs to be changed to create a playlist. At the moment 
+       it gets what currently playing and sets it to the state object
+      */
+     fetch('http://localhost:8888/refresh_token?refresh_token='+refresh_token)
+     .then(response => response.json())
+     .then(data => {
+      console.log(data);
+    })}
   }
-
   getHashParams() {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -61,7 +40,6 @@ class Home extends Component {
     }
     return hashParams;
   }
-
   render() {
     return (
       <div className="App">
@@ -75,5 +53,4 @@ class Home extends Component {
     );
   }
 }
-
 export default Home;
