@@ -50,7 +50,6 @@ class Home extends Component {
         }
       }
     }
-
       /*
         1. check if local storage have access token
         2. if it has, decrypt it
