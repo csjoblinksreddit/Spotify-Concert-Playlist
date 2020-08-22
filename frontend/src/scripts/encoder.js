@@ -6,8 +6,13 @@ export const encode = (string, key) => {
 }
 
 export const decode = (encryptedString, key) => {
-    const bytes = CryptoJS.AES.decrypt(encryptedString, key);
-    const decrypted = bytes.toString(CryptoJS.enc.Utf8);
-    return decrypted
+    try {
+        const bytes = CryptoJS.AES.decrypt(encryptedString, key);
+        const decrypted = bytes.toString(CryptoJS.enc.Utf8);
+        return decrypted
+    }
+    catch(err) {
+        console.log('login again')
+    } 
 }
 

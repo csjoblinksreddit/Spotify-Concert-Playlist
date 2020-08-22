@@ -4,10 +4,6 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './App'
-<<<<<<< HEAD:frontend/src/index.js
-=======
-
->>>>>>> master:src/index.js
 
 
 ReactDOM.render(
