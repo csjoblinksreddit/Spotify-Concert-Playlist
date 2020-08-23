@@ -1,18 +1,47 @@
 import React, { Component } from 'react';
 import { Input, Button, Select } from 'antd';
 import { Container, Row, Col } from 'reactstrap';
-import 'antd/dist/antd.css';
-import './playlist.css'
+import SpotifyWebApi from 'spotify-web-api-js';
 import EmbeddedPlaylist from '../embedded-playlist/embeddedPlaylist'
+import { decode, encode } from '../../scripts/encoder';
+import { checkIfTokenActive, checkIfRefreshTokenWorking } from '../../scripts/checkTokens';
+import generateRandomString from '../../scripts/randomString';
+import 'antd/dist/antd.css';
+import './playlist.css';
 
 
 const { Search, TextArea } = Input;
 const { Option } = Select;
 
-let accessToken = 'BQAaxvd3FSGPtz86XljgxlfqoYAQ1VxeWNi8LXOgcHf7p1ppnCk4BVNWk4CrTQUesjhAtUWZ5_uSWvAdL7QEsPMWZjF8bMxJecFBZMofXJZiksxsGLQzmjdCFCeNF4riFuiOfySjXr4IdRFhx1kDBD1OO_K5U1TIsI_mvxWqtX3CvakkEqeb0kpnwkWVrWZirwXWaw'
-let Spotify = require('spotify-web-api-js');
-let spotifyApi = new Spotify();
-spotifyApi.setAccessToken(accessToken);
+const spotifyApi = new SpotifyWebApi();
+
+let key = localStorage.getItem('key');
+let access_token = decode(localStorage.getItem('access_token'), key);
+let refresh_token = localStorage.getItem('refresh_token');
+
+
+if(access_token && key) {
+    if(checkIfTokenActive(access_token, spotifyApi)) {
+        spotifyApi.setAccessToken(access_token);
+    }
+    else if(checkIfRefreshTokenWorking(refresh_token)) {
+        fetch('http://localhost:8888/refresh_token?refresh_token='+refresh_token)
+        .then(response => response.json())
+        .then(data => {
+            key = generateRandomString(15);
+            localStorage.setItem('key', key);
+            localStorage.setItem('access_token', encode(data.access_token, key));
+            spotifyApi.setAccessToken(data.access_token);
+        })
+    }
+    else {
+        localStorage.removeItem('key');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+    }
+}
+
+
 
 class Playlist extends Component {
   constructor(props) {

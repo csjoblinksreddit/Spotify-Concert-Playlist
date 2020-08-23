@@ -4,7 +4,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
 import { encode, decode } from '../scripts/encoder';
 import generateRandomString from '../scripts/randomString';
-import checkIfRefreshTokenWorking from '../scripts/checkRefreshToken'
+import { checkIfRefreshTokenWorking, checkIfTokenActive} from '../scripts/checkTokens'
 
 
 
@@ -31,7 +31,7 @@ class Home extends Component {
       else {
         let decryptedToken = decode(localStorage.getItem('access_token'), localStorage.getItem('key'))
         let r_token = localStorage.getItem('refresh_token');
-        if(!this.checkIfTokenActive(decryptedToken)) {
+        if(!checkIfTokenActive(decryptedToken, spotifyApi)) {
           if(r_token) {
             if(checkIfRefreshTokenWorking(r_token)) {
               fetch('http://localhost:8888/refresh_token?refresh_token='+refresh_token)
@@ -73,33 +73,6 @@ class Home extends Component {
     }
     return hashParams;
   }
-
-  checkIfTokenActive(decryptedToken) {
-    let trueOrFalse;
-    spotifyApi.setAccessToken(decryptedToken);
-    spotifyApi.getUserPlaylists().then(
-      (data) => {
-          trueOrFalse = true;
-      },
-      (err) => {
-        trueOrFalse= false;
-      }
-    )
-    return trueOrFalse;
-  }
-
-  checkIfRefreshTokenWorking = (refresh_token) => {
-    let trueOrFalse;
-    fetch('http://localhost:8888/refresh_token?refresh_token='+refresh_token)
-    .then(response => {
-      response.json()
-      trueOrFalse = true;
-    })
-    .catch(err => {
-      trueOrFalse = false;
-    })        
-    return trueOrFalse;
-} 
 
   render() {
     return (
