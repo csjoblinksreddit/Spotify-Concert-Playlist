@@ -4,6 +4,8 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
 import { encode, decode } from '../scripts/encoder';
 import generateRandomString from '../scripts/randomString';
+import checkIfRefreshTokenWorking from '../scripts/checkRefreshToken'
+
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -31,7 +33,7 @@ class Home extends Component {
         let r_token = localStorage.getItem('refresh_token');
         if(!this.checkIfTokenActive(decryptedToken)) {
           if(r_token) {
-            if(this.checkIfRefreshTokenWorking(localStorage.getItem('refresh_token'))) {
+            if(checkIfRefreshTokenWorking(r_token)) {
               fetch('http://localhost:8888/refresh_token?refresh_token='+refresh_token)
               .then(response => response.json())
               .then(data => {
@@ -41,26 +43,23 @@ class Home extends Component {
              })
             }
             else {
-              // login again
+              localStorage.removeItem('key')
+              localStorage.removeItem('access_token')
+              localStorage.removeItem('refresh_token')
             }
           }
           else {
-            //login again
+            localStorage.removeItem('key')
+            localStorage.removeItem('access_token')
+            localStorage.removeItem('refresh_token')
           }  
         }
       }
     }
-      /*
-        1. check if local storage have access token
-        2. if it has, decrypt it
-        3. check decrypted token is working
-        4. if it isn't create another token
-        5. encrypt it
-        6. store it
-        7. if it is working do nothing
-        8. if we don't have access token at all create one go to 5 stop after finishing 6 
-      
-      */
+    /*TODO:
+      This method needs to be changed to create a playlist. At the moment 
+      it gets what currently playing and sets it to the state object
+    */
   }
 
   getHashParams() {
@@ -89,18 +88,18 @@ class Home extends Component {
     return trueOrFalse;
   }
 
-  checkIfRefreshTokenWorking(refresh_token) {
+  checkIfRefreshTokenWorking = (refresh_token) => {
     let trueOrFalse;
     fetch('http://localhost:8888/refresh_token?refresh_token='+refresh_token)
     .then(response => {
       response.json()
       trueOrFalse = true;
     })
-    .catch(err =>{
+    .catch(err => {
       trueOrFalse = false;
-    })
+    })        
     return trueOrFalse;
-  }
+} 
 
   render() {
     return (
@@ -117,8 +116,3 @@ class Home extends Component {
 
 }
 export default Home;
-
-      /*TODO:
-       This method needs to be changed to create a playlist. At the moment 
-       it gets what currently playing and sets it to the state object
-      */

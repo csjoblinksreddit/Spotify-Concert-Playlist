@@ -53,7 +53,16 @@ class LoggedInBar extends React.Component {
                             <a href="https://github.com/csjoblinksreddit/playlistapplication">Github</a>
                         </Menu.Item>
                         <Menu.Item id="login" key="login" icon={<LogoutOutlined />}>
-                            <a href="http://localhost:8888">Log Out</a>
+                            <a
+                                href='/' 
+                                onClick={() => {
+                                    localStorage.removeItem('key')
+                                    localStorage.removeItem('access_token')
+                                    localStorage.removeItem('refresh_token')
+                                }} 
+                            >
+                                Log Out
+                            </a>
                         </Menu.Item>
                     </Menu>
                 </div>
