@@ -15,34 +15,6 @@ const { Option } = Select;
 
 const spotifyApi = new SpotifyWebApi();
 
-let key = localStorage.getItem('key');
-let access_token = decode(localStorage.getItem('access_token'), key);
-let refresh_token = localStorage.getItem('refresh_token');
-
-
-if(access_token && key) {
-    if(checkIfTokenActive(access_token, spotifyApi)) {
-        spotifyApi.setAccessToken(access_token);
-    }
-    else if(checkIfRefreshTokenWorking(refresh_token)) {
-        fetch('http://localhost:8888/refresh_token?refresh_token='+refresh_token)
-        .then(response => response.json())
-        .then(data => {
-            key = generateRandomString(15);
-            localStorage.setItem('key', key);
-            localStorage.setItem('access_token', encode(data.access_token, key));
-            spotifyApi.setAccessToken(data.access_token);
-        })
-    }
-    else {
-        localStorage.removeItem('key');
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-    }
-}
-
-
-
 class Playlist extends Component {
   constructor(props) {
     super(props);
