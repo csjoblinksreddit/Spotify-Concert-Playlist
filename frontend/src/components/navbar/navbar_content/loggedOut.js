@@ -32,6 +32,15 @@ class LoggedOutBar extends React.Component {
             <Router>
                 <div className="navbarContainer">
                     <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+                        <Menu.Item id="home" key="home" icon={<HomeOutlined />}>
+                            <a href="/">Playlist Creator</a>
+                        </Menu.Item>
+                        <Menu.Item key="aboutUs" icon={<QuestionOutlined />}>
+                            <a href="/aboutUs">About Us</a>
+                        </Menu.Item>
+                        <Menu.Item key="github" icon={<GithubOutlined />}>
+                            <a href="https://github.com/csjoblinksreddit/playlistapplication">Github</a>
+                        </Menu.Item>
                         <Menu.Item id="login" key="login" icon={<LoginOutlined />}>
                             <a href="http://localhost:8888">Log In</a>
                         </Menu.Item>
