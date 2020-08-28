@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
 import ZipForm from './ZipForm';
-import { Container,Row, Col } from 'reactstrap';
+import Genres from './genres/Genres';
 
 const spotifyApi = new SpotifyWebApi();
-
-
 
 const ContainerStyle ={
   display: 'flex',
@@ -22,7 +19,20 @@ class Home extends Component {
     if (token) {
       spotifyApi.setAccessToken(token);
     }
+
+    this.state = {
+      zipSubmit: false,
+      zipCode: '',
+      genreSubmit: false,
+      genreCodes: [],
+      artistSubmit: false
+    }
+
+    this.zipHandle = this.zipHandle.bind(this);
+
   }
+
+
   componentDidMount() {
 
     if (spotifyApi.getAccessToken()) {
@@ -58,16 +68,34 @@ class Home extends Component {
     }
     return hashParams;
   }
-  getSteps () {
-    return ['zipform', 'genre', 'artists', ];
+
+  zipHandle(zip){
+    this.setState({
+      zipSubmit: true,
+      zipCode: zip
+
+    });
+    console.log(this.state.zip);
   }
+
+  genreHandle(){
+    this.setState({
+      genreSubmit: true 
+    });
+  }
+  artistHandle(){
+    this.setState({
+      artistSubmit: true
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           
-              <ZipForm/>
-              
+              <ZipForm action= {this.zipHandle}/>
+              {this.state.zipSubmit && <Genres zip = {this.state.zip}/>}
          
          
         </header>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import Genres from './genres/Genres';
 
-
 export default class ZipForm extends Component {
   constructor(props){
     super(props);
@@ -27,7 +26,7 @@ export default class ZipForm extends Component {
     return (
       <div className="App">
       Enter a zipcode
-      <Form className ="ZipForm" onSubmit={this.handleSubmit}>
+      <Form className ="ZipForm" onSubmit={() => this.props.action(this.state.zip)}>
         <FormGroup>
           <Label for="zipcode"></Label>
 
