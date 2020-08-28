@@ -4,7 +4,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
 import { encode, decode } from '../scripts/encoder';
 import generateRandomString from '../scripts/randomString';
-import { checkIfRefreshTokenWorking, checkIfTokenActive} from '../scripts/checkTokens'
+import { checkIfRefreshTokenWorking, checkIfTokenActive, generateNewAccessToken, storeTokens, removeTokens } from '../scripts/handleTokens'
 
 
 
@@ -13,6 +13,7 @@ class Home extends Component {
   constructor() {
     super();
   }
+
   componentDidMount() {
     const params = this.getHashParams();
     const access_token = params.access_token;
@@ -20,46 +21,30 @@ class Home extends Component {
     let key = '';
 
 
-    if(access_token || localStorage.getItem('access_token')) {
-      if(access_token) {
+    if(access_token || localStorage.getItem('access_token')) { // is it new login or user logged in before
+      if(access_token) { // new login
         key = generateRandomString(15);
-        localStorage.setItem('key', key);
-        localStorage.setItem('access_token', encode(access_token, key));
-        localStorage.setItem('refresh_token', refresh_token);
+        storeTokens(access_token, refresh_token, key)
       }
 
-      else {
+      else { // logged in before
         let decryptedToken = decode(localStorage.getItem('access_token'), localStorage.getItem('key'))
         let r_token = localStorage.getItem('refresh_token');
-        if(!checkIfTokenActive(decryptedToken, spotifyApi)) {
-          if(r_token) {
-            if(checkIfRefreshTokenWorking(r_token)) {
-              fetch('http://localhost:8888/refresh_token?refresh_token='+refresh_token)
-              .then(response => response.json())
-              .then(data => {
-                key = generateRandomString(15);
-                localStorage.setItem('key', key);
-                localStorage.setItem('access_token', encode(data.access_token, key));
-             })
-            }
+        if(!checkIfTokenActive(decryptedToken, spotifyApi)) { // if access token is not active
+          if(r_token) { // do we have refresh token in local storage
+            if(checkIfRefreshTokenWorking(r_token)) { // is our refresh token active
+              generateNewAccessToken(refresh_token) 
+            } 
             else {
-              localStorage.removeItem('key')
-              localStorage.removeItem('access_token')
-              localStorage.removeItem('refresh_token')
+              removeTokens() // login again if refresh token is not active
             }
-          }
-          else {
-            localStorage.removeItem('key')
-            localStorage.removeItem('access_token')
-            localStorage.removeItem('refresh_token')
+          } 
+          else { // login again if we don't have refresh token 
+            removeTokens()
           }  
         }
       }
     }
-    /*TODO:
-      This method needs to be changed to create a playlist. At the moment 
-      it gets what currently playing and sets it to the state object
-    */
   }
 
   getHashParams() {

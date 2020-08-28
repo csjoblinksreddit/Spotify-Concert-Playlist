@@ -3,9 +3,6 @@ import { Input, Button, Select } from 'antd';
 import { Container, Row, Col } from 'reactstrap';
 import SpotifyWebApi from 'spotify-web-api-js';
 import EmbeddedPlaylist from '../embedded-playlist/embeddedPlaylist'
-import { decode, encode } from '../../scripts/encoder';
-import { checkIfTokenActive, checkIfRefreshTokenWorking } from '../../scripts/checkTokens';
-import generateRandomString from '../../scripts/randomString';
 import 'antd/dist/antd.css';
 import './playlist.css';
 
