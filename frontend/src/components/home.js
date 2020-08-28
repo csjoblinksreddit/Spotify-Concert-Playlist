@@ -3,8 +3,16 @@ import logo from '../logo.svg';
 import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
 import ZipForm from './ZipForm';
+import { Container,Row, Col } from 'reactstrap';
+
 const spotifyApi = new SpotifyWebApi();
 
+
+
+const ContainerStyle ={
+  display: 'flex',
+  alignItems: 'center'
+}
 class Home extends Component {
 
   constructor() {
@@ -50,16 +58,18 @@ class Home extends Component {
     }
     return hashParams;
   }
-
+  getSteps () {
+    return ['zipform', 'genre', 'artists', ];
+  }
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>
-            <ZipForm/>
-            
-          </h1>
+          
+              <ZipForm/>
+              
+         
+         
         </header>
       </div>
     );

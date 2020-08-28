@@ -11,7 +11,7 @@ const { Search } = Input;
 
 let Spotify = require('spotify-web-api-js');
 let spotifyApi = new Spotify();
-spotifyApi.setAccessToken('');
+spotifyApi.setAccessToken('BQDvsdEnJdjRF7XF9iMqVm_wH2D525HD8FWGO0NyWeWZlrXXMM0ub6wk28u_IErAoQKmwr4h2QeCMIQ7jTFGpz-52dyL0qmUa8RWxDsHurhbIvhfEB7ec2iRYLgDmKEPleBQuk-pN9NKfbdiA-bqJBmdOrQCYqZJ3whFdzGOVPR1zqMO4yJG63Y7jFY6VqNhgUbM&refresh_token=AQD7PNbeye6IF00u8Qcpectjc1YmsRIK8EWCSYeZjPevsk864lVeNrVRjr90dUb8lPbrgY_LAxlmVozmYkDyl40V8SZsE-pVqz31z8n0RphxtbEWO2JL41Y8GMaZbBSj4T4');
 
 class Playlist extends Component {
   constructor(props) {
@@ -124,13 +124,7 @@ class Playlist extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <div id="artistInput">
-            <Search placeholder="input search text" onSearch={ value => this.searchArtist(value)} enterButton />
-          </div>
-          <ul>
-            <li>{this.state.artist}</li>
-            <li>{this.state.artistId}</li>
-          </ul>
+      
           {/*EDIT TO STOP MAKING REPEATED ARTIST ENTRIES*/}
           <Button placeholder="finalize playlist" onClick={this.addTracksToPlaylist}>Finalize!</Button>
           {this.state.isSubmitted && <CustomizePlaylist playlistID = {this.state.userPlaylistId}/>}

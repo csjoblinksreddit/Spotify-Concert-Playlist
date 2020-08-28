@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './Genres.css';
-import {Button, Input, Form} from 'reactstrap'
+import {Button, Input, Form, Col, Container} from 'reactstrap'
 import Artists from '../Artists';
+import { Row } from 'antd';
 
 class Genres extends Component {
   constructor(props)
@@ -89,15 +90,17 @@ class Genres extends Component {
       })
       return (
         <div className="App">
-                
-            Choose your genres!
-            <Form className="Genres" onSubmit={this.handleSubmit}>              
-              {genreCheckboxes}
-              <Button type="submit">Submit Genres</Button>
-            </Form>
-            
-            {this.state.isSubmitted && <Artists genreCodes= {this.state.genres} zip = {this.props.zip}/>}
         
+         
+                Choose your genres!
+                <Form className="Genres" onSubmit={this.handleSubmit}>              
+                  {genreCheckboxes}
+                  <Button type="submit">Submit Genres</Button>
+                </Form>
+              
+                {this.state.isSubmitted && <Col><Artists genreCodes= {this.state.genres} zip = {this.props.zip}/></Col>}
+           
+           
         </div>
       );
     }

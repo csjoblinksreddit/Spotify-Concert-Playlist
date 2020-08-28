@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import Genres from './genres/Genres';
 
+
 export default class ZipForm extends Component {
   constructor(props){
     super(props);
@@ -21,6 +22,7 @@ export default class ZipForm extends Component {
     this.setState({isSubmitted: true});
     event.preventDefault();
   }
+
   render() {
     return (
       <div className="App">
@@ -28,6 +30,8 @@ export default class ZipForm extends Component {
       <Form className ="ZipForm" onSubmit={this.handleSubmit}>
         <FormGroup>
           <Label for="zipcode"></Label>
+
+
             <Input type="text" value={this.state.zip} onChange={this.handleChange} id="zipcodeInput" placeholder="Enter Zipcode" />
         </FormGroup>
       <Button type ="submit" value={this.state.zip} placeholder="submit">Submit</Button>
