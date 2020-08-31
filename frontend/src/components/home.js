@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
+import LandingPage from './landingPage/landingPage.js'
+
 const spotifyApi = new SpotifyWebApi();
 
 class Home extends Component {
@@ -52,14 +54,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>
-            HOME PAGE
-          </h1>
-        </header>
-      </div>
+      <LandingPage/>
     );
   }
 }

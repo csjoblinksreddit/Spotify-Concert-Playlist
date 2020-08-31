@@ -1,0 +1,28 @@
+#landingPage-row {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    
+}
+#landingPage-mid {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: large;
+}
+
+#landingPage-container {
+
+  background-color: #997799;
+}
+p{
+    text-align: center;
+}
+h1{
+    color: #362b69;
+}
+h2{
+    color: #362b69;
+}
+#buttonLink{
+    background-color: #02FE8F;
+    color: #362b69;
+}
