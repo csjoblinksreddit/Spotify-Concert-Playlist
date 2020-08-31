@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { Input, Button, Select } from 'antd';
 import { Container, Row, Col } from 'reactstrap';
-import 'antd/dist/antd.css';
-import './playlist.css'
+import SpotifyWebApi from 'spotify-web-api-js';
 import EmbeddedPlaylist from '../embedded-playlist/embeddedPlaylist'
+import 'antd/dist/antd.css';
+import './playlist.css';
 
 
 const { Search, TextArea } = Input;
 const { Option } = Select;
 
-let accessToken = ''
-let Spotify = require('spotify-web-api-js');
-let spotifyApi = new Spotify();
-spotifyApi.setAccessToken(accessToken);
+const spotifyApi = new SpotifyWebApi();
 
 class Playlist extends Component {
   constructor(props) {
