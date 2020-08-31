@@ -35,6 +35,9 @@ export const generateNewAccessToken = (refresh_token) => new Promise((resolve, r
     localStorage.setItem('access_token', encode(data.access_token, key));
     resolve(true)
   })
+  .catch(err => {
+    reject(false)
+  })
 })
 
 export const storeTokens = (access_token, refresh_token,key) => {
