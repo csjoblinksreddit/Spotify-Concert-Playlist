@@ -4,7 +4,8 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
 import { encode, decode } from '../scripts/encoder';
 import generateRandomString from '../scripts/randomString';
-import { checkIfRefreshTokenWorking, checkIfTokenActive, generateNewAccessToken, storeTokens, removeTokens } from '../scripts/handleTokens'
+import { checkIfRefreshTokenWorking, checkIfTokenActive, generateNewAccessToken, storeTokens, removeTokens } from '../scripts/handleTokens';
+
 
 
 
@@ -63,7 +64,7 @@ class Home extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          
           <h1>
             HOME PAGE
           </h1>

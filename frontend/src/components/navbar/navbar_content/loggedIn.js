@@ -11,6 +11,9 @@ import homePage from '../../home'
 import playlistPage from '../../normal-playlist/playlist'
 import userPage from '../../user.js'
 import aboutUsPage from '../../aboutUs'
+import ConcertPlaylist from '../../concertPlaylist';
+import Concert from '../../concert'
+
 
 const { SubMenu } = Menu;
 
@@ -69,6 +72,8 @@ class LoggedInBar extends React.Component {
                 <Switch>
                     <Route exact path = '/' component = {homePage} />
                     <Route exact path = '/playlist' component = {playlistPage} />
+                    <Route exact path = '/concertPlaylist' component = {ConcertPlaylist}/>
+                    <Route exact path = '/concert' component={Concert}/>
                     <Route exact path = '/user' component = {userPage} />
                     <Route exact path = '/aboutUs' component = {aboutUsPage} />
                 </Switch>
