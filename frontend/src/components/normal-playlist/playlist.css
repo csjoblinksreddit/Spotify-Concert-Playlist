@@ -161,3 +161,90 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 .ant-select-multiple .ant-select-selection-item {
     background-color: rgba(2, 254, 143, 0.1);
 }
+
+@media only screen and (max-width: 500px) {
+    #form-container {
+        margin-left: 0px;
+        width: 100% !important;
+    }
+
+    #artistInput {
+        width: 100% !important;
+        display: block;
+    }
+
+    #searchArtist {
+        width: 100%;
+    }
+
+    #create-button {
+        margin-bottom: 20px;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #iframe-row {
+        width: 80% !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #iframe-container {
+        margin-left: 0px;
+    }
+
+    #playlist-properties {
+        margin: auto;
+    }
+
+    #name-input {
+        margin-left: auto;
+    }
+
+    #playlistPage-row {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .navbarContainer {
+        display: flex;
+    }
+
+    iframe {
+        width: 100%; 
+    }
+}
+
+
+ @media screen and (min-width:510px) and (max-width:1024px) {
+    #form-container {
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    #artistInput {
+        width: 50%;
+        margin: auto;
+    }
+
+    #pickArtists {
+        width: 50%;
+        margin: auto;
+    }
+
+    #iframe-row {
+        width: 35%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #iframe-container {
+        margin-left: 0px;
+    }
+
+    #playlist-properties {
+        margin: auto;
+    }
+}

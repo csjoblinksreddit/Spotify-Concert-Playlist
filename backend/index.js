@@ -185,7 +185,7 @@ app.post('/insert_artist', jsonParser, function(req, res) {
 
 app.get('/get_artists', function(req, res) {
   try {
-    con.query('SELECT `ArtistName`, `ArtistCount` FROM `SearchedArtists`', (err, result) => {
+    con.query('SELECT `ArtistName`, `ArtistCount` FROM `SearchedArtists`', (result) => {
       res.send(result)
     })
   } catch (error) {

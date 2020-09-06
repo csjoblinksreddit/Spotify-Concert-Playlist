@@ -39,6 +39,7 @@ class MobileLoggedInBar extends React.Component {
         return (
             <Router>
                 <div className="navbarContainer">
+                    <div><h1>Playlist App</h1></div>
                     <Button id="mobile-menu-button" type="link" icon={<MenuOutlined />} className="mobile-btn" onClick={() => {
                         this.setState({
                             visible: !this.state.visible,

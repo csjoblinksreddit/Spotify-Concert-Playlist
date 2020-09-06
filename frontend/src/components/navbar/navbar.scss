@@ -15,7 +15,7 @@
 .navbarContainer {
     background-color: #362b69;
     button {
-        margin-left: 90%;
+        margin-left: 85%;
         svg {
             color: #02FE8F
         }
@@ -240,5 +240,49 @@
   @media screen and (max-width: 1024px) {
     .navbarContainer {
       height: 50px;
+      display: flex;
+      h1 {
+        color: white;
+      }
+    }
+    .navbarContainer button {
+      margin-left: 75%;
     }
   }
+
+  @media screen and (max-width: 405px) {
+    .navbarContainer {
+      display: flex;
+      h1 {
+        color: white;
+      }
+    }
+    .navbarContainer button {
+      margin-left: 29% !important;
+    }
+  }
+
+  @media screen and (min-width:410px) and (max-width:505px) {
+    .navbarContainer {
+        display: flex;
+        h1 {
+          color: white;
+        }
+    }
+    .navbarContainer button {
+      margin-left: 35% !important;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+  .navbarContainer {
+    display: flex;
+    h1 {
+      color: white;
+    }
+  }
+  .navbarContainer button {
+    margin-left: 65%;
+  }
+}
