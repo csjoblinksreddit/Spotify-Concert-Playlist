@@ -14,7 +14,7 @@ import aboutUsPage from '../../aboutUs'
 
 const { SubMenu } = Menu;
 
-class LoggedOutBar extends React.Component {
+class MobileLoggedOutBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,4 +57,4 @@ class LoggedOutBar extends React.Component {
     }
 }
 
-export default LoggedOutBar
+export default MobileLoggedOutBar

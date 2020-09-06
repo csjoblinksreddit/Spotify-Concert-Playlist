@@ -1,5 +1,6 @@
 import generateRandomString from './randomString';
 import { encode } from './encoder';
+import base64 from 'base-64';
 
 export const checkIfRefreshTokenWorking = (refresh_token) => new Promise((resolve, reject) => {
   fetch('http://localhost:8888/refresh_token?refresh_token='+refresh_token)

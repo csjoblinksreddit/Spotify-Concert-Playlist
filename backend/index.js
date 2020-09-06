@@ -12,10 +12,25 @@ var request = require('request'); // "Request" library
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser')
 
-var client_id = ''; // Your client id
-var client_secret = ''; // Your secret
+var client_id = 'c0de84ab300244c5b319bda9bcacb641'; // Your client id
+var client_secret = 'a0500548f7644d0cb10a1d4d444b1858'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+
+
+var jsonParser = bodyParser.json() // create application/json parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false }) // create application/x-www-form-urlencoded parser
+
+const mysql = require('mysql');
+require('dotenv').config()
+
+const con = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
+});
 
 /**
  * Generates a random string containing numbers and letters
@@ -142,6 +157,78 @@ app.get('/refresh_token', function(req, res) {
     }
   });
 });
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+})
+
+app.post('/insert_artist', jsonParser, function(req, res) {
+  try {
+    const artist_name = req.body.artist_name
+    if(artist_name) {
+      res.sendStatus(200)
+    }
+    con.query(`SELECT ArtistName, ArtistCount FROM SearchedArtists WHERE ArtistName="${artist_name}";`, function(err, result) {
+      if (err) throw err;
+      if(result.length) { // if artist is searched before update count
+        con.query(`UPDATE SearchedArtists SET ArtistCount=${result[0].ArtistCount + 1} WHERE ArtistName="${artist_name}";`)
+      }
+      else { // if it's the first query of artist's, insert 
+        con.query(`INSERT INTO SearchedArtists (ArtistName, ArtistCount) VALUES ("${artist_name}", 1);`)
+      }
+    })
+  } catch(err) {
+    console.log(err)
+  }
+})
+
+app.get('/get_artists', function(req, res) {
+  try {
+    con.query('SELECT `ArtistName`, `ArtistCount` FROM `SearchedArtists`', (err, result) => {
+      res.send(result)
+    })
+  } catch (error) {
+    res.send('Fetching most searched artists has failed')
+  }
+})
+
+/*con.connect(function(err) {
+
+
+  // Create the table if its not created yet
+  // con.query('CREATE TABLE IF NOT EXISTS ZipCodes(id MEDIUMINT NOT NULL AUTO_INCREMENT, ZipCode MEDIUMINT , PRIMARY KEY(id));');
+  
+  // This is the name of our database. Have to tell mysql which database to use
+  con.query('Use AfternoonTeam;');
+
+    // This inserts a row in our table
+  con.query('INSERT INTO SearchedArtists (ArtistName, ArtistCount) VALUES (1111, 1);',function(err,result){
+      if (err) throw err;
+      console.log(result);
+  })
+
+  // The name of our table is Zipcodes
+  // This gets all rows from our table
+  con.query('Select * from SearchedArtists;' ,function (err,result){
+      if (err) throw err;
+      console.log(result);
+  });
+
+  // Top ten most common zip codes
+  let sql = 'SELECT artistName, count(*) FROM SearchedArtists GROUP BY artistName '+
+  'ORDER BY count(*) DESC LIMIT 10;'
+
+  con.query(sql,function(err,result){
+      if (err) throw err;
+
+      console.log(result);
+  })
+
+  con.end();
+});*/
+
+
 
 console.log('Listening on 8888');
 app.listen(8888);

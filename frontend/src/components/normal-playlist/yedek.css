@@ -1,0 +1,168 @@
+#artistInput {
+    width: 100%;
+}
+
+#playlistPage-row {
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+#playlistPage-col {
+    width: 90%;
+}
+
+#form-container {
+    width: 30%;
+    margin: auto;
+}
+
+#searchArtist {
+    margin-bottom: 20px;
+    height: 45px;
+    width: 75%;
+}
+
+#searchArtist-button {
+    width: 25%;
+}
+
+#pickArtists {
+    width: 100%;
+}
+
+#create-button {
+    margin-left: 50px;
+    height: 45px;
+    background-color: #362b69;
+    border-color: white;
+    font-weight: 600;
+    border-radius: 7px;
+}
+
+#create-button:hover {
+    background-color: rgba(153, 119, 153, 0.7);
+}
+
+.ant-btn-primary {
+    background-color: #997799 !important;
+    border-color: #997799 !important;
+    height: 100%;
+}
+
+.ant-input-search-enter-button input:hover, .ant-input-search-enter-button input:focus {
+    border-color: #997799 !important;
+    box-shadow: none;
+}
+
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+    color: #02FE8F !important;
+}
+
+.ant-input:hover {
+    border-color: #997799 !important;
+}
+
+.ant-input-affix-wrapper:hover {
+    border-color: #997799 !important;
+    box-shadow: none;
+}
+
+.ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused {
+    border-color: #997799 !important;
+    box-shadow: none;
+}
+
+#searchArtistInput {
+    font-weight: 500;
+    color: #5A5766;
+    height: 100%;
+}
+
+.ant-input-group-wrapper {
+    height: 100%;
+}
+
+.ant-input-group {
+    height: 100%;
+}
+
+#iframe-row {
+    margin-top: 100px;
+}
+
+#iframe-container {
+    margin-left: 340px;
+}
+
+#pickArtists .ant-select-selector:hover{
+    border-color: #997799 !important;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+#pickArtists .ant-select-selection-placeholder:hover {
+    cursor: pointer;
+}
+
+#playlist-properties {
+    width: 300px;
+    margin-left: 40px;
+}
+
+#name-input {
+    width: 245px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    margin-left: 25px;
+    box-shadow: none;
+}
+
+#name-input:hover {
+    border-color: #997799 !important;
+}
+
+#name-input:focus {
+    border-color: #997799 !important;
+}
+
+#description-input:hover {
+    border-color: #997799 !important;
+    box-shadow: none !important;
+}
+
+#description-input:focus {
+    border-color: #997799 !important;
+    box-shadow: none !important;
+}
+
+#description-input {
+    width: 300px 
+}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, textarea:-webkit-autofill, textarea:-webkit-autofill:hover, textarea:-webkit-autofill:focus, select:-webkit-autofill, select:-webkit-autofill:hover, select:-webkit-autofill:focus {
+    -webkit-text-fill-color: black;
+    -webkit-box-shadow: 0 0 0px 1000px 000 inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    background-color: rgba(153, 119, 153, 0.2) !important;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) .ant-select-item-option-state {
+    color: #646363;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    color: #646363;
+}
+
+.ant-select-focused.ant-select-multiple .ant-select-selector {
+    border-color: #997799 !important;
+    box-shadow: none !important;
+}
+
+.ant-select-multiple .ant-select-selection-item {
+    background-color: rgba(2, 254, 143, 0.1);
+}

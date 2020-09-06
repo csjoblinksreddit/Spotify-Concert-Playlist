@@ -20,7 +20,6 @@ class Home extends Component {
     const refresh_token = params.refresh_token;
     let key = '';
 
-
     if(access_token || localStorage.getItem('access_token')) { // is it new login or user logged in before
       if(access_token) { // new login
         key = generateRandomString(15);
