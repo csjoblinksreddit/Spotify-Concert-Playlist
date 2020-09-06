@@ -208,15 +208,18 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
         margin-right: auto;
     }
 
-    .navbarContainer {
-        display: flex;
-    }
-
     iframe {
         width: 100%; 
     }
 }
 
+
+@media screen and (min-width:410px) and (max-width:505px) {
+    .navbarContainer {
+        display: flex;
+    }
+
+}
 
  @media screen and (min-width:510px) and (max-width:1024px) {
     #form-container {

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import 'antd/dist/antd.css';
-import { Menu } from 'antd';
-import { QuestionOutlined, GithubOutlined, HomeOutlined, UserOutlined, LoginOutlined, PlusOutlined, AppstoreAddOutlined } from '@ant-design/icons';
+import { Menu, Drawer, Button } from 'antd';
+import { QuestionOutlined, GithubOutlined, HomeOutlined, LoginOutlined, MenuOutlined } from '@ant-design/icons';
 import '../navbar.scss' 
 
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
@@ -14,11 +14,13 @@ import aboutUsPage from '../../aboutUs'
 
 const { SubMenu } = Menu;
 
-class MobileLoggedOutBar extends React.Component {
+class MobileLoggedInBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             current: 'mail',
+            visible: false,
+            width: 395
         };
     }
 
@@ -26,14 +28,36 @@ class MobileLoggedOutBar extends React.Component {
         this.setState({ current: e.key });
     };
 
+    toggleCollapsed = () => {
+        this.setState({
+          collapsed: !this.state.collapsed,
+        });
+    }
+
     render() {
         const { current } = this.state;
         return (
             <Router>
                 <div className="navbarContainer">
-                    <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+                    <div><h1>Playlist App</h1></div>
+                    <Button id="mobile-menu-button" type="link" icon={<MenuOutlined />} className="mobile-btn" onClick={() => {
+                        this.setState({
+                            visible: !this.state.visible,
+                            width: window.innerWidth < 450 ? 300 : 385
+                            })
+                        }} 
+                    />
+                <Drawer width={this.state.width} visible={this.state.visible} placement="right" onClose={() => this.setState({ visible: false })} className="mobile-menu">
+                    <Menu 
+                        onClick={this.handleClick} 
+                        selectedKeys={[current]} 
+                        defaultSelectedKeys={['1']}
+                        defaultOpenKeys={['sub1']}
+                        mode="inline"
+                        inlineCollapsed={this.state.collapsed}
+                    >
                         <Menu.Item id="home" key="home" icon={<HomeOutlined />}>
-                            <a href="/">Playlist Creator</a>
+                            <a href="/">Playlist App</a>
                         </Menu.Item>
                         <Menu.Item key="aboutUs" icon={<QuestionOutlined />}>
                             <a href="/aboutUs">About Us</a>
@@ -45,6 +69,7 @@ class MobileLoggedOutBar extends React.Component {
                             <a href="http://localhost:8888">Log In</a>
                         </Menu.Item>
                     </Menu>
+                    </Drawer>
                 </div>
                 <Switch>
                     <Route exact path = '/' component = {homePage} />
@@ -57,4 +82,4 @@ class MobileLoggedOutBar extends React.Component {
     }
 }
 
-export default MobileLoggedOutBar
+export default MobileLoggedInBar

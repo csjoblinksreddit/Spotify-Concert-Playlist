@@ -57,7 +57,7 @@ class MobileLoggedInBar extends React.Component {
                         inlineCollapsed={this.state.collapsed}
                     >
                         <Menu.Item id="home" key="home" icon={<HomeOutlined />}>
-                            <a href="/">Playlist Creator</a>
+                            <a href="/">Playlist App</a>
                         </Menu.Item>
                         <Menu.Item key="user" icon={<UserOutlined />}>
                             <a href="/user">User</a>
