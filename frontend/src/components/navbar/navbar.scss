@@ -187,7 +187,7 @@
 
   #mobile-menu-button {
     transform: scale(1.5);
-    margin-top: 5px
+    margin-top: 1.5%;
   }
 
   @media screen and (max-width: 1024px) {   
@@ -250,17 +250,18 @@
     }
   }
 
-  @media screen and (max-width: 405px) {
-    .navbarContainer {
-      display: flex;
-      h1 {
-        color: white;
-      }
-    }
-    .navbarContainer button {
-      margin-left: 29% !important;
+  
+@media screen and (max-width: 768px) {
+  .navbarContainer {
+    display: flex;
+    h1 {
+      color: white;
     }
   }
+  .navbarContainer button {
+    margin-left: 65%;
+  }
+}
 
   @media screen and (min-width:410px) and (max-width:505px) {
     .navbarContainer {
@@ -275,14 +276,29 @@
 
 }
 
-@media screen and (max-width: 768px) {
-  .navbarContainer {
-    display: flex;
-    h1 {
-      color: white;
+  @media screen and (max-width: 405px) {
+    .navbarContainer {
+      display: flex;
+      h1 {
+        color: white;
+      }
+    }
+    .navbarContainer button {
+      margin-left: 29% !important;
     }
   }
-  .navbarContainer button {
-    margin-left: 65%;
+
+  @media screen and (max-width: 340px) {
+    .navbarContainer {
+      display: flex;
+      h1 {
+        color: white;
+      }
+    }
+    .navbarContainer button {
+      margin-left: 20% !important;
+    }
   }
-}
+
+
+
