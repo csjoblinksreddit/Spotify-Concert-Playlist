@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import './Genres.css';
-import {Button, Input, Form, Col, Container} from 'reactstrap'
-import Artists from '../Artists';
-import { Row } from 'antd';
+import {Row, Button, Input, FormGroup, Form, Col, Container} from 'reactstrap'
+import Artists from './Artists';
+import '../normal-playlist/playlist.css'; 
 
 class Genres extends Component {
   constructor(props)
@@ -77,31 +76,37 @@ class Genres extends Component {
           //genreSet.add(event.classifications[0].subGenre.name.concat("|".concat(event.classifications[0].subGenre.id)));
 
        });
-
+      
       genreSet.forEach(genre => {
-        genreCheckboxes.push(<div>
+        genreCheckboxes.push(<div key={genre.split("|")[0]}>
           <Input type="checkbox" 
             id={genre.split("|")[0]} 
             name={genre.split("|")[0]} 
             value={genre.split("|")[1]}
             onClick={this.handleToggle}/>
-             <label for={genre.split("|")[0]}> {genre.split("|")[0]}</label>
+             <label id="checkboxList"> {genre.split("|")[0]}</label>
           </div>)
       })
       return (
-        <div className="App">
+        <Container >
+          
+          <Row id="playlistPage-row">
+            
+            <Col>
+                <h3>Find artists of selected genres performing in your area</h3>
+                <Form className="Genres" onSubmit={this.handleSubmit}>      
         
-         
-                Choose your genres!
-                <Form className="Genres" onSubmit={this.handleSubmit}>              
-                  {genreCheckboxes}
-                  <Button type="submit" value={this.state.genres}>Submit Genres</Button>
+                  <FormGroup>      
+                    {genreCheckboxes}
+                  </FormGroup>
+                  <Button id="submit-button" type="submit" value={this.state.genres}>Submit Genres</Button>
+             
                 </Form>
-              
+                
                 {this.state.isSubmitted && <Col><Artists genreCodes= {this.state.genres} zip = {this.props.zip}/></Col>}
-           
-           
-        </div>
+            </Col>
+          </Row>
+        </Container>
       );
     }
   }   

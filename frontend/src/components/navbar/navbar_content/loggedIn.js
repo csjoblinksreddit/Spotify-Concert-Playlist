@@ -11,8 +11,8 @@ import homePage from '../../home'
 import playlistPage from '../../normal-playlist/playlist'
 import userPage from '../../user.js'
 import aboutUsPage from '../../aboutUs'
-import ConcertPlaylist from '../../concertPlaylist';
-import Concert from '../../concert'
+import ConcertPlaylist from '../../concert-playlist/concertPlaylist';
+import Concert from '../../concert-playlist/concert'
 
 
 const { SubMenu } = Menu;

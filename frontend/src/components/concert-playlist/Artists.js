@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Button, Input, Form} from 'reactstrap';
+import {Button, Input, Form, Container,Row, Col} from 'reactstrap';
 import {Link} from "react-router-dom";
+import '../normal-playlist/playlist.css'; 
 
 class Artists extends Component{
     constructor(props){
@@ -10,10 +11,10 @@ class Artists extends Component{
             concerts: [],
             artists: [],
             isSubmitted: false
-        }
+        };
         this.handleToggle = this.handleToggle.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    };
+    }
     componentDidMount()
     {
         const api_key = process.env.REACT_APP_API_KEY;
@@ -46,7 +47,7 @@ class Artists extends Component{
         } else{
           let remove = this.state.artists.indexOf(event.target.value);
           this.setState({
-            genres: this.state.artists.filter((_,i) => i !== remove)
+            artists: this.state.artists.filter((_,i) => i !== remove)
           }, 
             () => {
               console.log('artists', this.state.artists);
@@ -66,18 +67,20 @@ class Artists extends Component{
                 artistSet.add(event.name);
             })
             artistSet.forEach(artist =>{
-                artistCheckbox.push(<div>
+                artistCheckbox.push(<div key={artist}>
                     <Input type="checkbox"
                         id={artist}
                         name={artist}
                         value={artist}
                         onClick={this.handleToggle}/>
-                        <label for={artist}>{artist}</label>
+                        <label id="checkboxList">{artist}</label>
                 </div>)
             })
         }
-        return <div className="App">
-                Choose your artists!
+        return <Container className="App">
+            <Row id="playlistPage-row">
+                <Col>
+                <h3>Choose your artists!</h3>
                 <Form className="Artists" onSubmit={this.handleSubmit}>
                     {artistCheckbox}
                     <Link to={{
@@ -85,10 +88,12 @@ class Artists extends Component{
                         artists:{
                             concertList: this.state.artists
                         }
-                    }}><Button type="submit">Submit Artists</Button></Link>
+                    }}><Button id="submit-button" type="submit">Submit Artists</Button></Link>
                 </Form>
                 {this.state.isSubmitted && this.state.artists}
-            </div>
+                </Col>
+            </Row>
+            </Container>
     }
 }
 export default Artists;

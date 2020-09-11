@@ -24,7 +24,13 @@
 #pickArtists {
     width: 100%;
 }
-
+#submit-button{
+    height: 45px;
+    background-color: #362b69;
+    border-color: white;
+    font-weight: 600;
+    border-radius: 7px;
+}
 #create-button {
     margin-left: 50px;
     height: 45px;
@@ -37,7 +43,10 @@
 #create-button:hover {
     background-color: rgba(153, 119, 153, 0.7);
 }
-
+#checkboxList{
+    text-align: center;
+    font-size: large
+}
 .ant-btn-primary {
     background-color: #997799 !important;
     border-color: #997799 !important;

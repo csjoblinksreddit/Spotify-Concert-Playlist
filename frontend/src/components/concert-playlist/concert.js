@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { Input } from 'antd';
 import 'antd/dist/antd.css';
-import {Button, Form} from 'reactstrap'
-
-
-import CustomizePlaylist from './customizePlaylist';
+import {Button, Input, Container, Row, Col, Form, FormGroup} from 'reactstrap'
+import '../normal-playlist/playlist.css'; 
+import SpotifyWebApi from 'spotify-web-api-js';
 const { Search } = Input;
 
-let Spotify = require('spotify-web-api-js');
-let spotifyApi = new Spotify();
-spotifyApi.setAccessToken('BQCQ_8CJZZ9rw7yIzYXgT6iZsvM9fj-DFk_3VvB03bBnrrRgTAKIM4i8jvJIrEqoIlKAfWBIGdw-cyTz9m8DaHx6dBHvHCwoLFQN39jyaTHbqThypLU-JHJWHmtYnOsgfNCtLP4rPiDZfCHgbihZp9SiQURjdyh8YS0cv-pISw3qdkpuZUnPnh3oNd6seUak4DZI&refresh_token=AQCYRV2Fj5n0TNKOey-HNMQpeRUZrmMd3cou9EnpP2Lpta6_ffB6eJW5FKjmS9MFxjz2cLdumS_3KkWYNPmCdS0keuG4CokCr-4wBPBjZJtbO3CQq_Z65wo53USF-UsG728');
+const  spotifyApi = new SpotifyWebApi();
+
 
 class Concert extends Component {
   constructor(props) {
@@ -21,7 +18,10 @@ class Concert extends Component {
       artistId: '',
       topTracks: [],
       topTracksIds: [],
-      isSubmitted: false
+      isSubmitted: false,
+      playlistName: 'Playlist App TEST',
+      playlistDescription: 'Created with Playlist App TEST'
+
     }
   }
 
@@ -44,7 +44,6 @@ class Concert extends Component {
             this.setState({
                 userId: this.sliceUserId(data.href)
             })
-            this.createPlaylist();
             
         },
         (err) => {
@@ -85,6 +84,7 @@ class Concert extends Component {
                     topTracksIds:this.state.topTracksIds.concat(track.uri) //storing track id's in an array
                 })
             })
+
        
           },
           (err) => {
@@ -94,42 +94,66 @@ class Concert extends Component {
   }
 
   createPlaylist = () => {
-      spotifyApi.createPlaylist(this.state.userId, {name: 'playlistApp_000001', description: 'created with playlistApp'}).then(
+      spotifyApi.createPlaylist(this.state.userId, {name: this.state.playlistName, description: this.state.playlistDescription}).then(
           (data) => {
+            console.log(data.id);
               this.setState({
                   userPlaylistId: data.id
-              })              
+              })  
+              this.addTracksToPlaylist(data.id, this.state.topTracksIds)     
+                     
           },
           (err) => {
               console.log(err)
           }
       )
+     
   }
 
-  addTracksToPlaylist = () => {
-      this.setState({isSubmitted: true})
-      spotifyApi.addTracksToPlaylist(this.state.userPlaylistId, this.state.topTracksIds).then(
+  addTracksToPlaylist = (playlistId, topTracksIds) => {
+      spotifyApi.addTracksToPlaylist(playlistId, topTracksIds).then(
           (data) => {
               console.log(data)
           },
           (err) => {
+              
               console.log(err)
           }
       )
   }
+  handleNameInput = (event) => {
+    this.setState({
+      playlistName: event.target.value
+    })
+  }
+  handleDescriptionInput = (event) => {
+    this.setState({
+      playlistDescription: event.target.value
+    })
+  }
+  
+  handleCreate = () => {
+    this.createPlaylist();
+    
+  }
 
   render() {
     return (
-      <div >
-        <header>
-          
-      
-          {/*EDIT TO STOP MAKING REPEATED ARTIST ENTRIES*/}
-          <Button placeholder="finalize playlist" onClick={this.addTracksToPlaylist}>Add Playlist to Spotify</Button>
-          {this.state.isSubmitted && <CustomizePlaylist playlistID = {this.state.userPlaylistId}/>}
-        </header>
-        
-      </div>
+      <Container >
+        <Row id="playlistPage-row">
+          <Col>
+              <h3>Customize Playlist</h3>
+              <Form>
+                <FormGroup>
+                  <Input onChange={this.handleNameInput} placeholder="Playlist Name" />
+                  <Input placeholder="Playlist Description" onChange={this.handleDescriptionInput} /> 
+                </FormGroup>
+                <Button id="submit-button" placeholder="finalize playlist" type="primary" onClick={this.handleCreate}>Add Playlist to Spotify</Button>
+              </Form>
+
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
