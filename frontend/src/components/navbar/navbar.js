@@ -23,23 +23,12 @@ class NavBar extends React.Component {
         };
     }
 
-    getMostSearchedArtists = async() => {
-        await Axios.get(`http://localhost:8888/get_artists`)
-        .then((res) => {
-            console.log(res.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    
-    }
+
 
     componentDidMount() {
         let key = localStorage.getItem('key');
         let refresh_token = localStorage.getItem('refresh_token');
         let access_token = decode(localStorage.getItem('access_token'), key);
-
-        this.getMostSearchedArtists();
 
 
         if(isMobile()) {
@@ -75,14 +64,14 @@ class NavBar extends React.Component {
     render() {
         if(this.state.mobile) {
             return (
-                <div>
+                <div style={{flex: '1'}}>
                     {this.state.isLoggedIn === true ? <MobileLoggedInBar /> : <MobileLoggedOutBar />}
                 </div>
             )
         }
         else {
             return (
-                <div>
+                <div style={{flex: '1'}}>
                     {this.state.isLoggedIn === true ? <LoggedInBar /> : <LoggedOutBar />}
                 </div>
             )

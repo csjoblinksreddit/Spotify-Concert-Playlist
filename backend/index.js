@@ -14,8 +14,8 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser')
 
-var client_id = 'c0de84ab300244c5b319bda9bcacb641'; // Your client id
-var client_secret = 'a0500548f7644d0cb10a1d4d444b1858'; // Your secret
+var client_id = '34d0f37f9cf045159da4767b3b25e24b'; // Your client id
+var client_secret = '89e8abc94e65490f9ea0610d1977f50b'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 
@@ -159,7 +159,6 @@ app.get('/refresh_token', function(req, res) {
 });
 
 con.connect(function(err) {
-  if (err) throw err;
   console.log("Connected!");
 })
 
@@ -170,7 +169,6 @@ app.post('/insert_artist', jsonParser, function(req, res) {
       res.sendStatus(200)
     }
     con.query(`SELECT ArtistName, ArtistCount FROM SearchedArtists WHERE ArtistName="${artist_name}";`, function(err, result) {
-      if (err) throw err;
       if(result.length) { // if artist is searched before update count
         con.query(`UPDATE SearchedArtists SET ArtistCount=${result[0].ArtistCount + 1} WHERE ArtistName="${artist_name}";`)
       }
@@ -185,7 +183,7 @@ app.post('/insert_artist', jsonParser, function(req, res) {
 
 app.get('/get_artists', function(req, res) {
   try {
-    con.query('SELECT `ArtistName`, `ArtistCount` FROM `SearchedArtists`', (result) => {
+    con.query('SELECT * FROM SearchedArtists ORDER BY ArtistCount DESC;', (err, result) => {
       res.send(result)
     })
   } catch (error) {
