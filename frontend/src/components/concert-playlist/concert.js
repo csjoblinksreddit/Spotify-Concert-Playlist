@@ -20,10 +20,13 @@ class Concert extends Component {
       topTracksIds: [],
       isSubmitted: false,
       playlistName: 'Playlist App TEST',
-      playlistDescription: 'Created with Playlist App TEST'
+      playlistDescription: 'Created with Playlist App TEST',
+      errorMessage: false
 
     }
   }
+
+
 
   //ISSUE: MAKES A NEW PLAYLIST EVERY TIME PAGE IS REFRESHED
   componentDidMount(){
@@ -56,13 +59,18 @@ class Concert extends Component {
     console.log(artist);
     spotifyApi.searchArtists(artist).then(
         (data) => {
-            if(data !== undefined) {
+            if(data !== undefined && data.artists.items.length != 0) {
+                
                 let artistName = data.artists.items[0].name
                 let id = data.artists.items[0].id
                 this.setState({
                     artist: artistName, // index is 0 because most popular query's index is 0 
                     artistId: id // index is 0 because most popular query's index is 0 
                 })
+            }
+            else{
+              //HANDLE NO SPOTIFY ARTIST FOUND ERROR
+              this.setState({errorMessage: true})
             }
             this.getTopTracks(this.state.artistId, 'TR');
         },
@@ -132,8 +140,9 @@ class Concert extends Component {
     })
   }
   
-  handleCreate = () => {
+  handleCreate = (event) => {
     this.createPlaylist();
+    event.preventDefault();
     
   }
 
@@ -150,6 +159,7 @@ class Concert extends Component {
                 </FormGroup>
                 <Button id="submit-button" placeholder="finalize playlist" type="primary" onClick={this.handleCreate}>Add Playlist to Spotify</Button>
               </Form>
+              {this.state.errorMessage && <div>Some of the selected artists were not found on Spotify</div>}
 
           </Col>
         </Row>

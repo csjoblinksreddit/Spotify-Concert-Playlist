@@ -64,7 +64,11 @@ class Artists extends Component{
             var artistSet = new Set();
             var artistCheckbox = [];
             concerts._embedded.events.map(event => {
-                artistSet.add(event.name);
+                event._embedded.attractions.map(attraction =>{
+                    artistSet.add(attraction.name);
+                })
+
+                
             })
             artistSet.forEach(artist =>{
                 artistCheckbox.push(<div key={artist}>
