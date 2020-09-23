@@ -12,6 +12,7 @@ const Statistics = () => {
     await Axios.get(`http://localhost:8888/get_artists`)
       .then((res) => {
         setMostSearchedArtists(res.data);
+        console.log(res.data)
       })
       .then(() => {
         setLoading(false)

@@ -14,8 +14,8 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser')
 
-var client_id = ''; // Your client id
-var client_secret = ''; // Your secret
+var client_id = '34d0f37f9cf045159da4767b3b25e24b'; // Your client id
+var client_secret = '89e8abc94e65490f9ea0610d1977f50b'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 
@@ -185,6 +185,7 @@ app.get('/get_artists', function(req, res) {
   try {
     con.query('SELECT * FROM SearchedArtists ORDER BY ArtistCount DESC;', (err, result) => {
       res.send(result)
+      console.log(result)
     })
   } catch (error) {
     res.send('Fetching most searched artists has failed')
