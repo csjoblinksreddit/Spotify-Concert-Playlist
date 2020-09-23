@@ -1,8 +1,9 @@
 #footer-row {
-	padding-top: 3em;
-	position: relative;
-	bottom: 0;
-	width: 100%;
+	position: absolute;
+    left: 0;
+    bottom: 0;
+	right: 0;
+	margin-bottom: -200px;
 	color: white;
 	background-color: #362b69;
 	.ant-col {
@@ -11,5 +12,11 @@
 		margin-bottom: 15px;
 		font-weight: 500;
 		width: 100%;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	#footer-row {
+		margin-bottom: -580px;
 	}
 }

@@ -14,8 +14,8 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser')
 
-var client_id = '34d0f37f9cf045159da4767b3b25e24b'; // Your client id
-var client_secret = '89e8abc94e65490f9ea0610d1977f50b'; // Your secret
+var client_id = 'e60dd722d0b54b86b2b1fd42c45d04a4'; // Your client id
+var client_secret = '6d0b4424224f465d9f3dda719895e4fa'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 
@@ -185,7 +185,6 @@ app.get('/get_artists', function(req, res) {
   try {
     con.query('SELECT * FROM SearchedArtists ORDER BY ArtistCount DESC;', (err, result) => {
       res.send(result)
-      console.log(result)
     })
   } catch (error) {
     res.send('Fetching most searched artists has failed')
@@ -193,37 +192,29 @@ app.get('/get_artists', function(req, res) {
 })
 
 /*con.connect(function(err) {
-
-
   // Create the table if its not created yet
   // con.query('CREATE TABLE IF NOT EXISTS ZipCodes(id MEDIUMINT NOT NULL AUTO_INCREMENT, ZipCode MEDIUMINT , PRIMARY KEY(id));');
   
   // This is the name of our database. Have to tell mysql which database to use
   con.query('Use AfternoonTeam;');
-
     // This inserts a row in our table
   con.query('INSERT INTO SearchedArtists (ArtistName, ArtistCount) VALUES (1111, 1);',function(err,result){
       if (err) throw err;
       console.log(result);
   })
-
   // The name of our table is Zipcodes
   // This gets all rows from our table
   con.query('Select * from SearchedArtists;' ,function (err,result){
       if (err) throw err;
       console.log(result);
   });
-
   // Top ten most common zip codes
   let sql = 'SELECT artistName, count(*) FROM SearchedArtists GROUP BY artistName '+
   'ORDER BY count(*) DESC LIMIT 10;'
-
   con.query(sql,function(err,result){
       if (err) throw err;
-
       console.log(result);
   })
-
   con.end();
 });*/
 
