@@ -3,10 +3,8 @@ import React from "react";
 import "antd/dist/antd.css";
 import { Menu, Drawer, Button } from "antd";
 import {
-  QuestionOutlined,
   GithubOutlined,
   HomeOutlined,
-  UserOutlined,
   LogoutOutlined,
   PlusOutlined,
   AppstoreAddOutlined,
@@ -19,8 +17,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import homePage from "../../home";
 import playlistPage from "../../normal-playlist/playlist";
-import userPage from "../../user.js";
-import aboutUsPage from "../../aboutUs";
 import Statistics from "../../statistics/statistics";
 
 const { SubMenu } = Menu;
@@ -83,9 +79,6 @@ class MobileLoggedInBar extends React.Component {
               <Menu.Item id="home" key="home" icon={<HomeOutlined />}>
                 <a href="/">Playlist App</a>
               </Menu.Item>
-              <Menu.Item key="user" icon={<UserOutlined />}>
-                <a href="/user">User</a>
-              </Menu.Item>
               <SubMenu
                 id="dropDown"
                 icon={<AppstoreAddOutlined />}
@@ -100,9 +93,6 @@ class MobileLoggedInBar extends React.Component {
               </SubMenu>
               <Menu.Item key="statistics" icon={<BarChartOutlined />}>
                 <a href="/statistics">Statistics</a>
-              </Menu.Item>
-              <Menu.Item key="aboutUs" icon={<QuestionOutlined />}>
-                <a href="/aboutUs">About Us</a>
               </Menu.Item>
               <Menu.Item key="github" icon={<GithubOutlined />}>
                 <a href="https://github.com/csjoblinksreddit/playlistapplication">
@@ -127,8 +117,6 @@ class MobileLoggedInBar extends React.Component {
         <Switch>
           <Route exact path="/" component={homePage} />
           <Route exact path="/playlist" component={playlistPage} />
-          <Route exact path="/user" component={userPage} />
-          <Route exact path="/aboutUs" component={aboutUsPage} />
           <Route exact path="/statistics" component={Statistics} />
         </Switch>
       </Router>
