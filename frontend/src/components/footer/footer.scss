@@ -1,0 +1,22 @@
+#footer-row {
+	position: absolute;
+    left: 0;
+    bottom: 0;
+	right: 0;
+	margin-bottom: -200px;
+	color: white;
+	background-color: #362b69;
+	.ant-col {
+		margin: auto;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		font-weight: 500;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	#footer-row {
+		margin-bottom: -580px;
+	}
+}
