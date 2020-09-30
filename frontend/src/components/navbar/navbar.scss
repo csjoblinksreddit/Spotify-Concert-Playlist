@@ -1,0 +1,307 @@
+.navbarContainer #login {
+    margin-left: 700px;
+}
+
+
+.anticon svg {
+    margin-top: -7px;
+}
+
+.anticon svg path {
+    stroke: white;
+    stroke-width: 7px;
+}
+
+.navbarContainer {
+    background-color: #362b69;
+    button {
+        margin-left: 85%;
+        svg {
+            color: #02FE8F
+        }
+    }
+}
+
+.navbarContainer ul {
+    background-color: #362b69;
+    color:white;
+    height: 55px;
+}
+
+.navbarContainer .ant-menu-item {
+    margin-top: 5.4px !important;
+}
+.navbarContainer span a {
+    color:white !important;
+}
+
+.navbarContainer #dropDown {
+    font-weight: 500;
+}
+
+.navbarContainer span > a{
+    font-weight: 500;
+}
+
+.navbarContainer li:hover a{
+    color:#02FE8F !important;
+}
+
+.navbarContainer li:hover svg{
+    color:#02FE8F !important;
+    stroke: #02FE8F !important;
+}
+
+.navbarContainer li:hover {
+    color: white !important;
+    border-bottom-color: #02FE8F !important;
+}
+
+.navbarContainer .ant-menu-submenu-title:hover {
+    color:#02FE8F !important;
+}
+
+.ant-menu-item:hover, .ant-menu-item-active, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-submenu-active, .ant-menu-submenu-title:hover {
+    color: #02FE8F  !important;
+}
+
+.ant-menu-item a:hover {
+    color: #02FE8F !important;
+}
+
+.ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected {
+    border-bottom: 2px solid #02FE8F !important;
+}
+
+.ant-menu-item::selection {
+    background: #02FE8F !important;
+}
+
+.ant-menu-item a::selection {
+    background: #02FE8F !important;
+}
+
+.ant-menu-item-selected {
+    color: #02FE8F !important;
+}
+.ant-menu-horizontal > .ant-menu-item-selected a {
+    color: #02FE8F !important;
+}
+
+.mobile-menu {
+    display: none;
+    cursor: pointer;
+  
+    .logo {
+      margin-left: 20px;
+    }
+  
+    .bordered {
+      border-bottom: 1px solid fade(black, 5%);
+    }
+  
+    .language-btn {
+      box-shadow: none;
+      margin-top: 20px;
+    }
+  
+    .ant-popover-inner-content {
+      padding: 0 16px;
+    }
+  
+    .ant-popover-arrow {
+      display: none;
+    }
+  
+    .ant-btn-greenyblue {
+      margin-top: 20px;
+      width: calc(100% - 40px);
+    }
+  
+    .ant-drawer-body {
+      padding: 12px 0;
+  
+      .logo {
+        width: 70%;
+      }
+    }
+  
+    .ant-menu {
+  
+      .ant-menu-submenu {
+        margin-bottom: 0;
+  
+        .ant-menu-submenu-title {
+          height: 48px;
+          line-height: 1;
+          padding: 16px !important;
+          margin: 0;
+        }
+  
+        .ant-menu-sub {
+          
+          .ant-menu-item {
+            padding: 0 0 0 32px !important;
+            font-weight: lighter;
+          }
+  
+          .ant-anchor-link {
+            padding-left: 32px;
+          }
+        }
+      }
+    }
+  
+    .ant-anchor-wrapper {
+      padding-top: 40px;
+  
+      .ant-anchor {
+  
+        .ant-anchor-ink {
+          display: none;
+        }
+  
+        .ant-anchor-link {
+          padding: 16px;
+          
+          a {
+            font-weight: lighter;
+          }
+  
+          &-active {
+            background-color: fade(blue, 10%);
+          }
+  
+          &.pb-0 {
+            padding-bottom: 0 !important;
+            background-color: transparent;
+  
+            > .ant-anchor-link-title {
+              margin-bottom: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #mobile-menu-button {
+    transform: scale(1.5);
+    margin-top: 1.5%;
+  }
+
+  @media screen and (max-width: 1024px) {   
+        
+    .ant-menu-item:active {
+      background-color: white;
+    }
+
+    .ant-menu-submenu-title:active {
+      background-color: white;
+    }
+
+    .mobile-menu {
+      display: block;
+    }
+  
+    .ant-layout {
+      background-color: white;
+      width: 1024px;
+    }
+    .mobile-menu .ant-menu .ant-menu-submenu .ant-menu-submenu-title {
+      padding-left: 24px !important;
+    }
+  }
+  
+
+  
+  
+  @media screen and (max-width: 480px) {
+  
+    html {
+      --antd-wave-shadow-color: black;
+    }
+  
+    .ant-collapse .ant-collapse-content {
+      font-size: 6vw;
+    }
+  
+    .mobile-menu {
+      display: block;
+    }
+  
+    .ant-layout {
+      background-color: white;
+      width: 1000px;
+    }
+  
+    .ant-menu {
+      font-size: 5vw;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .navbarContainer {
+      height: 50px;
+      display: flex;
+      h1 {
+        color: white;
+      }
+    }
+    .navbarContainer button {
+      margin-left: 75%;
+    }
+  }
+
+  
+@media screen and (max-width: 768px) {
+  .navbarContainer {
+    display: flex;
+    h1 {
+      color: white;
+    }
+  }
+  .navbarContainer button {
+    margin-left: 65%;
+  }
+}
+
+  @media screen and (min-width:410px) and (max-width:505px) {
+    .navbarContainer {
+        display: flex;
+        h1 {
+          color: white;
+        }
+    }
+    .navbarContainer button {
+      margin-left: 35% !important;
+    }
+
+}
+
+  @media screen and (max-width: 405px) {
+    .navbarContainer {
+      display: flex;
+      h1 {
+        color: white;
+      }
+    }
+    .navbarContainer button {
+      margin-left: 29% !important;
+    }
+  }
+
+  @media screen and (max-width: 340px) {
+    .navbarContainer {
+      display: flex;
+      h1 {
+        color: white;
+      }
+    }
+    .navbarContainer button {
+      margin-left: 20% !important;
+    }
+  }
+
+
+

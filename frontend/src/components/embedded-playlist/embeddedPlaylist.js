@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import Iframe from 'react-iframe'
 
 const EmbeddedPlaylist = (props) => {
