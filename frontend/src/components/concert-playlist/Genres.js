@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Row, Button, Input, FormGroup, Form, Col, Container} from 'reactstrap'
 import Artists from './Artists';
 import '../normal-playlist/playlist.css'; 
+import Axios from 'axios';
 
 class Genres extends Component {
   constructor(props)
@@ -15,23 +16,24 @@ class Genres extends Component {
     };
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   componentDidMount(){
-    const api_key = process.env.REACT_APP_API_KEY;
-    const zipCode = this.props.zip;
-    console.log(this.props.zip);
-    const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${api_key}&postalCode=${zipCode}`;
-    console.log(url);
-    fetch(url).then(
-      res => res.json()).then(json => {
-        this.setState({
-          loaded: true,
-          concerts: json,
-        })
-      });
-    
+    this.callAPI();
   }
+
+  callAPI(){
+    fetch('http://localhost:8888/ticketmasterAPI?zip='+this.props.zip).then(
+      res => res.json()
+    ).then(json => 
+      this.setState({
+        loaded:true,
+        concerts: json
+      })
+    ).catch(err => console.log(err))
+  }
+
   handleSubmit = (event) =>{
     console.log(this.state.genres);
     this.setState({isSubmitted: true});

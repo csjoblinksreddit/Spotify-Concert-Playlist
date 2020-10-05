@@ -17,14 +17,16 @@ class Artists extends Component{
     }
     componentDidMount()
     {
-        const api_key = process.env.REACT_APP_API_KEY;
-        const zipCode = this.props.zip;
+        this.callAPI();
+    }
+
+    callAPI(){
         var genreString = "";
         this.props.genreCodes.forEach(genre => {
             genreString = genreString.concat(genre.concat(","));
         });
-        const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${api_key}&genreId=${genreString}&postalCode=${zipCode}`
-        fetch(url).then(
+
+        fetch(`http://localhost:8888/ticketmasterAPI?zip=`+this.props.zip+`&genreId=${genreString}`).then(
             res => res.json()).then(json => {
                 this.setState({
                     loaded: true,
@@ -32,6 +34,7 @@ class Artists extends Component{
                 })
             });
     }
+
     handleSubmit = (event) =>{
         console.log(this.state.genres);
         this.setState({isSubmitted: true});

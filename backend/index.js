@@ -13,6 +13,7 @@ var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser')
+var ticketmasterRouter = require("./ticketmasterAPI");
 
 var client_id = ''; // Your client id
 var client_secret = ''; // Your secret
@@ -54,6 +55,8 @@ var app = express();
 app.use(express.static(__dirname + '/public'))
    .use(cors())
    .use(cookieParser());
+
+app.use("/ticketmasterAPI", ticketmasterRouter);
 
 app.get('/login', function(req, res) {
 
@@ -189,6 +192,7 @@ app.get('/get_artists', function(req, res) {
     res.send('Fetching most searched artists has failed')
   }
 })
+
 
 /*con.connect(function(err) {
   // Create the table if its not created yet
