@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Container, Row, Col, Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import Genres from './Genres';
 import '../normal-playlist/playlist.css'; 
+import Axios from 'axios'
 
 export default class ZipForm extends Component {
   constructor(props){
@@ -20,7 +21,21 @@ export default class ZipForm extends Component {
   }
   handleSubmit = (event) =>{
     this.setState({isSubmitted: true});
+    this.updateDB(this.state.zip)
     event.preventDefault();
+
+  }
+
+  updateDB = async(zipcode) => {
+    await Axios.post(`http://localhost:8888/insert_zipcode`,{
+      zip_code: zipcode
+    })
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   render() {

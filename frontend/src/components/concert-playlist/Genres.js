@@ -61,13 +61,13 @@ class Genres extends Component {
     var{loaded, concerts} = this.state;
     if(!loaded)
     {
-      console.log(concerts);
       return <div>Genres Loading...</div>
     }
-    else if(parseInt(concerts.page.totalElements) == 0){
+    else if(concerts._embedded == undefined || parseInt((concerts.page.totalElements) == 0)){
       return <div>There are no concerts in your area</div>;
     }
     else{
+      console.log(parseInt(concerts.page.totalElements))
       const genreSet = new Set();
       const genreCheckboxes = [];
       

@@ -6,6 +6,7 @@ import "./statistics.scss";
 
 const Statistics = () => {
   const [mostSearchedArtists, setMostSearchedArtists] = useState([]);
+  const [mostSearchedZipcodes, setMostSearchedZipcodes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const getMostSearchedArtists = async () => {
@@ -22,8 +23,23 @@ const Statistics = () => {
       });
   };
 
+  const getMostSearchedZipcodes = async () => {
+    await Axios.get(`http://localhost:8888/get_zipcodes`)
+      .then((res) => {
+        setMostSearchedZipcodes(res.data);
+        console.log(res.data)
+      })
+      .then(() => {
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getMostSearchedArtists();
+    getMostSearchedZipcodes();
   }, []);
 
   return (
@@ -61,18 +77,18 @@ const Statistics = () => {
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Artist Name</th>
+                    <th>Zipcode</th>
                     <th>Count</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {mostSearchedArtists !== undefined &&
-                    mostSearchedArtists.map((val, key) => {
+                  {mostSearchedZipcodes !== undefined &&
+                    mostSearchedZipcodes.map((val, key) => {
                       return (
                         <tr>
                           <th scope="row">{key + 1}</th>
-                          <td>{val.ArtistName}</td>
-                          <td>{val.ArtistCount}</td>
+                          <td>{val.ZipCode}</td>
+                          <td>{val.ZipCodeCount}</td>
                         </tr>
                       );
                     })}

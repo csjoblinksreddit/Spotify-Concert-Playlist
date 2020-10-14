@@ -193,7 +193,35 @@ app.get('/get_artists', function(req, res) {
   }
 })
 
+app.post('/insert_zipcode', jsonParser, function(req, res) {
+  try {
+    const zipcode = req.body.zip_code
+    if(zipcode) {
+      res.sendStatus(200)
+    }
+    con.query(`SELECT ZipCode, ZipCodeCount FROM ZipCodes WHERE ZipCode="${zipcode}";`, function(err, result) {
+      if (err) throw err;
+      if(result.length) { // if artist is searched before update count
+        con.query(`UPDATE ZipCodes SET ZipCodeCount=${result[0].ZipCodeCount + 1} WHERE ZipCode="${zipcode}";`)
+      }
+      else { // if it's the first query of artist's, insert 
+        con.query(`INSERT INTO ZipCodes (ZipCode, ZipCodeCount) VALUES ("${zipcode}", 1);`)
+      }
+    })
+  } catch(err) {
+    console.log(err)
+  }
+})
 
+app.get('/get_zipcodes', function(req, res) {
+  try {
+    con.query('SELECT * FROM ZipCodes ORDER BY ZipCodeCount DESC;', (err, result) => {
+      res.send(result)
+    })
+  } catch (error) {
+    res.send('Fetching most searched artists has failed')
+  }
+})
 /*con.connect(function(err) {
   // Create the table if its not created yet
   // con.query('CREATE TABLE IF NOT EXISTS ZipCodes(id MEDIUMINT NOT NULL AUTO_INCREMENT, ZipCode MEDIUMINT , PRIMARY KEY(id));');
