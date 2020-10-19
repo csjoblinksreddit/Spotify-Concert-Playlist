@@ -1,0 +1,54 @@
+#statistics-outter-row, #statistics-outter-col, #statistics-row {
+	width: 100%;
+}
+
+#statistics-row {
+	margin-top: 5%;
+
+	h3 {
+		color: #362b69;
+	}
+
+	.table thead th {
+		color: #362b69;
+	}
+	.table th {
+		color: #997799;
+	}
+
+	.table-hover tbody tr:hover {
+		background-color: rgba(2, 254, 143, 0.1);
+	}
+}
+
+#statistics-col {
+	width: 20%;
+	margin: auto;
+	margin-top: 0px;
+}
+
+
+.ant-spin-dot-item {
+	background-color: #02FE8F;
+}
+.ant-spin-text {
+	color: #02FE8F;
+}
+
+
+@media screen and (min-width: 1100px) {
+	.statistics-spin {
+		margin-top: 10%;
+	}
+}
+
+
+
+@media screen and (max-width: 1024px) {
+	#statistics-col {
+		width: 90%;
+		margin: auto;
+		margin-top: 5%;
+		margin-bottom: 5%;
+	}
+}

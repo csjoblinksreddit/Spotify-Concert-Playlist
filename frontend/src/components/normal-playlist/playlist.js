@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { Input, Button, Select } from 'antd';
 import { Container, Row, Col } from 'reactstrap';
-import 'antd/dist/antd.css';
-import './playlist.css'
+import SpotifyWebApi from 'spotify-web-api-js';
 import EmbeddedPlaylist from '../embedded-playlist/embeddedPlaylist'
+import 'antd/dist/antd.css';
+import './playlist.css';
+import Axios from 'axios';
 
 
 const { Search, TextArea } = Input;
 const { Option } = Select;
 
-let accessToken = ''
-let Spotify = require('spotify-web-api-js');
-let spotifyApi = new Spotify();
-spotifyApi.setAccessToken(accessToken);
+const spotifyApi = new SpotifyWebApi();
 
 class Playlist extends Component {
   constructor(props) {
@@ -63,7 +62,6 @@ class Playlist extends Component {
   //if(this.state.searchedArtists.includes(data.artists.items[0].name))
   getArtist = (artist) => {
     spotifyApi.searchArtists(artist).then(
-
         (data) => {
             if(data !== undefined) {
                 for(let i = 0; i < data.artists.items.length; i++) {
@@ -72,6 +70,7 @@ class Playlist extends Component {
                             searchedArtists: this.state.searchedArtists.concat(data.artists.items[i].name),
                             selectedArtists: this.state.selectedArtists.concat(data.artists.items[i].name)
                         })
+                        this.updateDB(data.artists.items[i].name)
                         break;
                     }
                 }
@@ -210,6 +209,19 @@ class Playlist extends Component {
     this.setState({
         playlistDescription: event.target.value
     })
+  }
+
+  updateDB = async (name) => {
+    await Axios.post(`http://localhost:8888/insert_artist`, {
+        artist_name: name
+    })
+    .then((res) => {
+        console.log(res)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+
   }
 
   render() {

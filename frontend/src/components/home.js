@@ -5,39 +5,49 @@ import '../App.css';
 import LandingPage from './landingPage/landingPage.js'
 
 const spotifyApi = new SpotifyWebApi();
+import { encode, decode } from '../scripts/encoder';
+import generateRandomString from '../scripts/randomString';
+import { checkIfRefreshTokenWorking, checkIfTokenActive, generateNewAccessToken, storeTokens, removeTokens } from '../scripts/handleTokens';
 
+
+
+
+const spotifyApi = new SpotifyWebApi();
 class Home extends Component {
-
   constructor() {
     super();
-    const params = this.getHashParams();
-    const token = params.access_token;
-    if (token) {
-      spotifyApi.setAccessToken(token);
-
-    }
   }
-  componentDidMount() {
-    if (spotifyApi.getAccessToken()) {
-      /*TODO:
-       This method needs to be changed to create a playlist. At the moment 
-       it gets what currently playing and sets it to the state object
-      */
-      spotifyApi.getMyCurrentPlaybackState()
-        .then((response) => {
-          console.log(response.item)
-          if(response){
-            this.setState({
-              nowPlaying: {
-                name: response.item.name,
-                albumArt: response.item.album.images[0].url
-              }
-            });
-          }
-          
-        })
-    }
 
+  componentDidMount() {
+    const params = this.getHashParams();
+    const access_token = params.access_token;
+    const refresh_token = params.refresh_token;
+    let key = '';
+
+    if(access_token || localStorage.getItem('access_token')) { // is it new login or user logged in before
+      if(access_token) { // new login
+        key = generateRandomString(15);
+        storeTokens(access_token, refresh_token, key)
+      }
+
+      else { // logged in before
+        let decryptedToken = decode(localStorage.getItem('access_token'), localStorage.getItem('key'))
+        let r_token = localStorage.getItem('refresh_token');
+        if(!checkIfTokenActive(decryptedToken, spotifyApi)) { // if access token is not active
+          if(r_token) { // do we have refresh token in local storage
+            if(checkIfRefreshTokenWorking(r_token)) { // is our refresh token active
+              generateNewAccessToken(refresh_token) 
+            } 
+            else {
+              removeTokens() // login again if refresh token is not active
+            }
+          } 
+          else { // login again if we don't have refresh token 
+            removeTokens()
+          }  
+        }
+      }
+    }
   }
 
   getHashParams() {
@@ -57,6 +67,6 @@ class Home extends Component {
       <LandingPage/>
     );
   }
-}
 
+}
 export default Home;
