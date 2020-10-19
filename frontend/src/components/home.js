@@ -4,7 +4,8 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
 import { encode, decode } from '../scripts/encoder';
 import generateRandomString from '../scripts/randomString';
-import { checkIfRefreshTokenWorking, checkIfTokenActive, generateNewAccessToken, storeTokens, removeTokens } from '../scripts/handleTokens'
+import { checkIfRefreshTokenWorking, checkIfTokenActive, generateNewAccessToken, storeTokens, removeTokens } from '../scripts/handleTokens';
+
 
 
 import Header from './landingPage/header';

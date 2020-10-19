@@ -14,9 +14,14 @@ import "../navbar.scss";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+
+import ConcertPlaylist from '../../concert-playlist/concertPlaylist';
+import Concert from '../../concert-playlist/concert'
+
 import homePage from "../../home";
 import playlistPage from "../../normal-playlist/playlist";
 import Statistics from "../../statistics/statistics";
+
 
 const { SubMenu } = Menu;
 
@@ -83,6 +88,8 @@ class LoggedInBar extends React.Component {
           <Route exact path="/" component={homePage} />
           <Route exact path="/playlist" component={playlistPage} />
           <Route exact path="/statistics" component={Statistics} />
+          <Route exact path = '/concertPlaylist' component = {ConcertPlaylist}/>
+          <Route exact path = '/concert' component={Concert}/>
         </Switch>
       </Router>
     );
