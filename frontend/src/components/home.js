@@ -3,8 +3,6 @@ import logo from '../logo.svg';
 import SpotifyWebApi from 'spotify-web-api-js';
 import '../App.css';
 import LandingPage from './landingPage/landingPage.js'
-
-const spotifyApi = new SpotifyWebApi();
 import { encode, decode } from '../scripts/encoder';
 import generateRandomString from '../scripts/randomString';
 import { checkIfRefreshTokenWorking, checkIfTokenActive, generateNewAccessToken, storeTokens, removeTokens } from '../scripts/handleTokens';
