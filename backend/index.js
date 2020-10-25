@@ -15,8 +15,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser')
 var ticketmasterRouter = require("./ticketmasterAPI");
 
-var client_id = '8ee20af313e04f82a7233ae5e7a5d5a2'; // Your client id
-var client_secret = '04e221bc13724576ba546fe0cc255205'; // Your secret
+var client_id = ''; // Your client id
+var client_secret = ''; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 
@@ -222,34 +222,6 @@ app.get('/get_zipcodes', function(req, res) {
     res.send('Fetching most searched artists has failed')
   }
 })
-/*con.connect(function(err) {
-  // Create the table if its not created yet
-  // con.query('CREATE TABLE IF NOT EXISTS ZipCodes(id MEDIUMINT NOT NULL AUTO_INCREMENT, ZipCode MEDIUMINT , PRIMARY KEY(id));');
-  
-  // This is the name of our database. Have to tell mysql which database to use
-  con.query('Use AfternoonTeam;');
-    // This inserts a row in our table
-  con.query('INSERT INTO SearchedArtists (ArtistName, ArtistCount) VALUES (1111, 1);',function(err,result){
-      if (err) throw err;
-      console.log(result);
-  })
-  // The name of our table is Zipcodes
-  // This gets all rows from our table
-  con.query('Select * from SearchedArtists;' ,function (err,result){
-      if (err) throw err;
-      console.log(result);
-  });
-  // Top ten most common zip codes
-  let sql = 'SELECT artistName, count(*) FROM SearchedArtists GROUP BY artistName '+
-  'ORDER BY count(*) DESC LIMIT 10;'
-  con.query(sql,function(err,result){
-      if (err) throw err;
-      console.log(result);
-  })
-  con.end();
-});*/
-
-
 
 console.log('Listening on 8888');
 app.listen(8888);

@@ -10,7 +10,7 @@ class Artists extends Component{
             loaded: false,
             concerts: [],
             artists: [],
-            isSubmitted: false
+            isSubmitted: false,
         };
         this.handleToggle = this.handleToggle.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +25,7 @@ class Artists extends Component{
         this.props.genreCodes.forEach(genre => {
             genreString = genreString.concat(genre.concat(","));
         });
-
+        console.log(`http://localhost:8888/ticketmasterAPI?zip=`+this.props.zip+`&genreId=${genreString}`);
         fetch(`http://localhost:8888/ticketmasterAPI?zip=`+this.props.zip+`&genreId=${genreString}`).then(
             res => res.json()).then(json => {
                 this.setState({
@@ -60,18 +60,25 @@ class Artists extends Component{
       }
     render(){
         var{loaded, concerts} = this.state;
+        var attractionError = false;
         if(!loaded){
             return <div>Artists Loading...</div>
+        }
+        else if(concerts._embedded == undefined || concerts._embedded.events == undefined){
+            attractionError = true;
         }
         else{
             var artistSet = new Set();
             var artistCheckbox = [];
             concerts._embedded.events.map(event => {
-                event._embedded.attractions.map(attraction =>{
-                    artistSet.add(attraction.name);
-                })
-
-                
+                if(event._embedded.attractions){
+                    event._embedded.attractions.map(attraction =>{
+                        artistSet.add(attraction.name);
+                    })
+                }
+                else{
+                    attractionError = true;
+                }
             })
             artistSet.forEach(artist =>{
                 artistCheckbox.push(<div key={artist}>
@@ -87,6 +94,7 @@ class Artists extends Component{
         return <Container className="App">
             <Row id="playlistPage-row">
                 <Col>
+                <h2>Step 3: </h2>
                 <h3>Choose your artists!</h3>
                 <Form className="Artists" onSubmit={this.handleSubmit}>
                     {artistCheckbox}
@@ -97,6 +105,7 @@ class Artists extends Component{
                         }
                     }}><Button id="submit-button" type="submit">Submit Artists</Button></Link>
                 </Form>
+                {attractionError && <div><br></br>Some artists were not included</div>}
                 {this.state.isSubmitted && this.state.artists}
                 </Col>
             </Row>

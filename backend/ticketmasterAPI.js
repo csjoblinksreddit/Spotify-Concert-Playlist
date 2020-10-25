@@ -9,7 +9,6 @@ router.get("/", function(req, res, next) {
     const api_key = process.env.TICKETMASTER_KEY;
     const zipcode = req.query.zip;
     var url = ``;
-    console.log("zipcode: " + zipcode);
    
     if(req.query.genreId){
         //SEARCHING FOR GENRES IN ZIPCODE CASE

@@ -5,6 +5,7 @@ import { Collapse, CssBaseline, IconButton } from '@material-ui/core';
 import AppFunctions from './appFunctions'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Link as Scroll } from 'react-scroll';
+import isMobile from '../../scripts/isMobile';
 
 
 
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     titleText: {
         color: '#997799',
         fontSize: '4.5rem',
-        fontWeight: 'bold'
+        fontFamily: "Poppins"
         
     },
     goDown: {
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     }
 
 }));
+
 export default function App(){
     const classes = useStyles();
     const [checked, setChecked] = useState(false);
@@ -45,33 +47,27 @@ export default function App(){
         setChecked(true);
     },[]);
     return (
-        <div className={classes.root}>
+        <div className={classes.root} id="header">
             <CssBaseline/>
-            <Collapse 
-                in={checked} 
-                {...(checked ? {timeout: 1000} : {})} 
-                collapsedHeight={50}
-            >
                 <div className={classes.container}>
-                    <div className={classes.title}>
-                        <h1 className={classes.titleText}>Welcome to our <br/>Playlist Maker <br/>
-                        <Scroll to="appFunctions" smooth={true}>
-                            <IconButton>
-                                <ExpandMoreIcon className={classes.goDown}/>
-                            </IconButton>
-                        </Scroll>
-                        </h1>
-                        
+                    <div className={classes.title}>   
+                        <Collapse 
+                        in={checked} 
+                        {...(checked ? {timeout: 1000} : {})} 
+                        >
+                            <h1 className={classes.titleText}>Make Your New <br/>Playlist<br/>
+                                
+                                <Scroll to="appFunctions" smooth={true}>
+                                    <IconButton>
+                                        <ExpandMoreIcon className={classes.goDown}/>
+                                    </IconButton>
+                                </Scroll>
+                            
+                            </h1>
+                        </Collapse>
                     </div>
-                    
-                    
-                
-                </div>
-            </Collapse>
-            <AppFunctions/>
-
-            
-        </div>
-        
+                </div>     
+            <AppFunctions/>     
+        </div>   
         );
 }

@@ -63,11 +63,10 @@ class Genres extends Component {
     {
       return <div>Genres Loading...</div>
     }
-    else if(concerts._embedded == undefined || parseInt((concerts.page.totalElements) == 0)){
-      return <div>There are no concerts in your area</div>;
+    else if(concerts._embedded == undefined || concerts._embedded.events == undefined || parseInt((concerts.page.totalElements) == 0)){
+      return <div><br/>There are no concerts in your area</div>;
     }
     else{
-      console.log(parseInt(concerts.page.totalElements))
       const genreSet = new Set();
       const genreCheckboxes = [];
       
@@ -75,7 +74,7 @@ class Genres extends Component {
       concerts._embedded.events.map(event => {
           //Add genre names and genreIDs
           genreSet.add(event.classifications[0].genre.name.concat("|".concat(event.classifications[0].genre.id)));
-          //genreSet.add(event.classifications[0].subGenre.name.concat("|".concat(event.classifications[0].subGenre.id)));
+          
 
        });
       
@@ -90,12 +89,13 @@ class Genres extends Component {
           </div>)
       })
       return (
-        <Container >
+        <Container>
           
           <Row id="playlistPage-row">
             
             <Col>
-                <h3>Find artists of selected genres performing in your area</h3>
+                <h2>Step 2: </h2>
+                <h3>Choose Your Genres <br/></h3>
                 <Form className="Genres" onSubmit={this.handleSubmit}>      
         
                   <FormGroup>      
@@ -105,7 +105,7 @@ class Genres extends Component {
              
                 </Form>
                 
-                {this.state.isSubmitted && <Col><Artists genreCodes= {this.state.genres} zip = {this.props.zip}/></Col>}
+                {this.state.isSubmitted && <div><Artists genreCodes= {this.state.genres} zip = {this.props.zip}/></div>}
             </Col>
           </Row>
         </Container>
