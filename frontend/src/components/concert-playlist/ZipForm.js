@@ -14,7 +14,7 @@ export default class ZipForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange = (event) => 
+  handleChange = (event) =>
   {
     this.setState({zip: event.target.value});
     this.setState({isSubmitted: false});
@@ -41,11 +41,11 @@ export default class ZipForm extends Component {
   render() {
     return (
       <Container>
-        
         <Row id="playlistPage-row">
           <Col>
            
-            <h3>Find Genres of Concerts in your Area</h3>
+            <h2>Step 1: </h2>
+            <h3>Enter a Zip Code</h3>
               <Form className ="ZipForm" onSubmit={this.handleSubmit}>
                 <FormGroup>
                   <Label for="zipcode"></Label>

@@ -1,5 +1,8 @@
+h2{
+    color: #997799
+}
 h3{
-    color: #362b69
+    color: #5A5766
 }
 #artistInput {
     display: flex;

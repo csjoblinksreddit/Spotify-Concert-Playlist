@@ -18,6 +18,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import homePage from "../../home";
 import playlistPage from "../../normal-playlist/playlist";
 import Statistics from "../../statistics/statistics";
+import ZipForm from "../../concert-playlist/ZipForm";
+import Concert from '../../concert-playlist/concert';
 
 const { SubMenu } = Menu;
 
@@ -47,7 +49,7 @@ class MobileLoggedInBar extends React.Component {
       <Router>
         <div className="navbarContainer">
           <div>
-            <h1>Playlist App</h1>
+            <h1 className="navbarH1">Playlist App</h1>
           </div>
           <Button
             id="mobile-menu-button"
@@ -118,6 +120,8 @@ class MobileLoggedInBar extends React.Component {
           <Route exact path="/" component={homePage} />
           <Route exact path="/playlist" component={playlistPage} />
           <Route exact path="/statistics" component={Statistics} />
+          <Route exact path="/concertPlaylist" component={ZipForm}/>
+          <Route exact path = '/concert' component={Concert}/>
         </Switch>
       </Router>
     );

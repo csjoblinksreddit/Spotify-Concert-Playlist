@@ -5,8 +5,8 @@ import '../App.css';
 import { encode, decode } from '../scripts/encoder';
 import generateRandomString from '../scripts/randomString';
 import { checkIfRefreshTokenWorking, checkIfTokenActive, generateNewAccessToken, storeTokens, removeTokens } from '../scripts/handleTokens';
-
-
+import Header from './landingPage/header';
+import { CssBaseline } from '@material-ui/core';
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -61,13 +61,9 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          
-          <h1>
-            HOME PAGE
-          </h1>
-        </header>
+      <div>
+            <CssBaseline/>
+            <Header/>
       </div>
     );
   }
