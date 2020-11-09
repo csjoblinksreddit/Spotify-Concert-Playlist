@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import {Button, Input, Container, Row, Col, Form, FormGroup} from 'reactstrap'
 import '../normal-playlist/playlist.css'; 
 import SpotifyWebApi from 'spotify-web-api-js';
+import {Link} from "react-router-dom";
 const { Search } = Input;
 
 const  spotifyApi = new SpotifyWebApi();
@@ -21,7 +22,8 @@ class Concert extends Component {
       isSubmitted: false,
       playlistName: 'Playlist App TEST',
       playlistDescription: 'Created with Playlist App TEST',
-      errorMessage: false
+      errorMessage: false,
+      createdPlaylist: false
 
     }
   }
@@ -142,6 +144,9 @@ class Concert extends Component {
   
   handleCreate = (event) => {
     this.createPlaylist();
+    this.setState({
+      createdPlaylist: true
+    })
     event.preventDefault();
     
   }
@@ -160,9 +165,19 @@ class Concert extends Component {
                 <Button id="submit-button" placeholder="finalize playlist" type="primary" onClick={this.handleCreate}>Add Playlist to Spotify</Button>
               </Form>
               {this.state.errorMessage && <div>Some of the selected artists were not found on Spotify</div>}
-
           </Col>
+          
         </Row>
+        <Row>
+            {this.state.createdPlaylist && 
+              <Col>
+                  <Link to={{
+                            pathname:'../concertPlaylist',
+                    
+                        }}><Button id="buttonLink" variant="contained" type="submit">Playlist Added! Click to create a new playlist</Button></Link>
+
+              </Col>}
+          </Row>
       </Container>
     );
   }
