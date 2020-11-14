@@ -4,6 +4,7 @@ import {Button, Input, Container, Row, Col, Form, FormGroup} from 'reactstrap'
 import '../normal-playlist/playlist.css'; 
 import SpotifyWebApi from 'spotify-web-api-js';
 import {Link} from "react-router-dom";
+import EmbeddedPlaylist from '../embedded-playlist/embeddedPlaylist';
 const { Search } = Input;
 
 const  spotifyApi = new SpotifyWebApi();
@@ -23,14 +24,13 @@ class Concert extends Component {
       playlistName: 'Playlist App TEST',
       playlistDescription: 'Created with Playlist App TEST',
       errorMessage: false,
-      createdPlaylist: false
+      createdPlaylist: false,
+      random: Math.floor((Math.random()*1000) + 1),
+      iframe: ''
 
     }
   }
 
-
-
-  //ISSUE: MAKES A NEW PLAYLIST EVERY TIME PAGE IS REFRESHED
   componentDidMount(){
     this.getUser();
     if(this.props.location.artists){
@@ -74,7 +74,7 @@ class Concert extends Component {
               //HANDLE NO SPOTIFY ARTIST FOUND ERROR
               this.setState({errorMessage: true})
             }
-            this.getTopTracks(this.state.artistId, 'TR');
+            this.getTopTracks(this.state.artistId, 'US');
         },
         (err) => {
             console.log(err)
@@ -108,7 +108,8 @@ class Concert extends Component {
           (data) => {
             console.log(data.id);
               this.setState({
-                  userPlaylistId: data.id
+                  userPlaylistId: data.id,
+                  iframe: `https://open.spotify.com/embed/playlist/${data.id}`
               })  
               this.addTracksToPlaylist(data.id, this.state.topTracksIds)     
                      
@@ -153,7 +154,8 @@ class Concert extends Component {
 
   render() {
     return (
-      <Container >
+      <Container className="playlistPage-container">
+        {this.state.createdPlaylist && <Row id="iframe-row"><EmbeddedPlaylist key={this.state.random} link={this.state.iframe}/> </Row>}
         <Row id="playlistPage-row">
           <Col>
               <h3>Customize Playlist</h3>
@@ -164,20 +166,18 @@ class Concert extends Component {
                 </FormGroup>
                 <Button id="submit-button" placeholder="finalize playlist" type="primary" onClick={this.handleCreate}>Add Playlist to Spotify</Button>
               </Form>
+              <br/>
               {this.state.errorMessage && <div>Some of the selected artists were not found on Spotify</div>}
-          </Col>
-          
-        </Row>
-        <Row>
-            {this.state.createdPlaylist && 
+              {this.state.createdPlaylist && 
               <Col>
                   <Link to={{
                             pathname:'../concertPlaylist',
                     
                         }}><Button id="buttonLink" variant="contained" type="submit">Playlist Added! Click to create a new playlist</Button></Link>
-
+                  
               </Col>}
-          </Row>
+          </Col>
+        </Row>
       </Container>
     );
   }

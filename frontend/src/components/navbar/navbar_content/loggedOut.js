@@ -52,7 +52,7 @@ class LoggedOutBar extends React.Component {
               </a>
             </Menu.Item>
             <Menu.Item id="login" key="login" icon={<LoginOutlined />}>
-              <a href="http://localhost:8888">Log In</a>
+              <a href="3.139.102.236">Log In</a>
             </Menu.Item>
           </Menu>
         </div>

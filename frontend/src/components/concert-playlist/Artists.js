@@ -109,7 +109,7 @@ class Artists extends Component{
                 {this.state.isSubmitted && this.state.artists}
                 </Col>
             </Row>
-            </Container>
+        </Container>
     }
 }
 export default Artists;
