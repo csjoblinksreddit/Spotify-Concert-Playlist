@@ -14,6 +14,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import homePage from "../../home";
 import playlistPage from "../../normal-playlist/playlist";
+import concertPlaylistPage from "../../concert-playlist/ZipForm";
 import Statistics from "../../statistics/statistics";
 
 const { SubMenu } = Menu;
@@ -59,6 +60,7 @@ class LoggedOutBar extends React.Component {
         <Switch>
           <Route exact path="/" component={homePage} />
           <Route exact path="/playlist" component={playlistPage} />
+          <Route exact path="/concertPlaylist" component={concertPlaylistPage} />
           <Route exact path="/statistics" component={Statistics} />
         </Switch>
       </Router>

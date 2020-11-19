@@ -4,7 +4,7 @@ import {Button, Input, Container, Row, Col, Form, FormGroup} from 'reactstrap'
 import '../normal-playlist/playlist.css'; 
 import SpotifyWebApi from 'spotify-web-api-js';
 import {Link} from "react-router-dom";
-import EmbeddedPlaylist from '../embedded-playlist/embeddedPlaylist';
+import EmbeddedConcertPlaylist from '../embedded-playlist/embeddedConcertPlaylist';
 const { Search } = Input;
 
 const  spotifyApi = new SpotifyWebApi();
@@ -155,29 +155,37 @@ class Concert extends Component {
   render() {
     return (
       <Container className="playlistPage-container">
-        {this.state.createdPlaylist && <Row id="iframe-row"><EmbeddedPlaylist key={this.state.random} link={this.state.iframe}/> </Row>}
-        <Row id="playlistPage-row">
-          <Col>
-              <h3>Customize Playlist</h3>
-              <Form>
-                <FormGroup>
-                  <Input onChange={this.handleNameInput} placeholder="Playlist Name" />
-                  <Input placeholder="Playlist Description" onChange={this.handleDescriptionInput} /> 
-                </FormGroup>
-                <Button id="submit-button" placeholder="finalize playlist" type="primary" onClick={this.handleCreate}>Add Playlist to Spotify</Button>
-              </Form>
-              <br/>
-              {this.state.errorMessage && <div>Some of the selected artists were not found on Spotify</div>}
-              {this.state.createdPlaylist && 
-              <Col>
-                  <Link to={{
-                            pathname:'../concertPlaylist',
-                    
-                        }}><Button id="buttonLink" variant="contained" type="submit">Playlist Added! Click to create a new playlist</Button></Link>
+        {!this.state.createdPlaylist && 
+          <Row id="playlistPage-row">
+            <Col>
+                <h3>Customize Playlist</h3>
+                <Form>
+                  <FormGroup>
+                    <Input onChange={this.handleNameInput} placeholder="Playlist Name" />
+                    <Input placeholder="Playlist Description" onChange={this.handleDescriptionInput} /> 
+                  </FormGroup>
+                  {!this.state.createdPlaylist && <Button id="submit-button" placeholder="finalize playlist" type="primary" onClick={this.handleCreate}>Add Playlist to Spotify</Button>}
                   
-              </Col>}
-          </Col>
-        </Row>
+                 
+                </Form>
+                <br/>
+                {this.state.errorMessage && <div>Some of the selected artists were not found on Spotify</div>}
+                
+            </Col>
+            
+          </Row>
+        }
+        {this.state.createdPlaylist && 
+          <Row id="iframe-row">
+            <Col >
+              <EmbeddedConcertPlaylist key={this.state.random} link={this.state.iframe}/>
+            
+              <Link to={{pathname:'../concertPlaylist'}}>
+                <Button id="button-link" variant="contained" type="submit">Start Over</Button>
+              </Link>
+            </Col>
+        </Row>}
+        
       </Container>
     );
   }
