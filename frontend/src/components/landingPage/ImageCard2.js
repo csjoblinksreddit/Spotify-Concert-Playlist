@@ -58,7 +58,11 @@ export default function ImageCard({checked}) {
               <Link to={{
                               pathname:'../concertPlaylist',
                       
+<<<<<<< HEAD
                           }}><Button id="buttonLink" variant="contained" type="submit">Create by Concerts</Button></Link>
+=======
+                          }}><Button id="buttonLink" variant="contained" type="submit">Enter Zipcode</Button></Link>
+>>>>>>> b6f78b1abe232cb2064e3e7a2095fae8b2fa6689
 
             </Typography>
           </CardContent>

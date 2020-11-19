@@ -25,8 +25,13 @@ class Artists extends Component{
         this.props.genreCodes.forEach(genre => {
             genreString = genreString.concat(genre.concat(","));
         });
+<<<<<<< HEAD
         console.log(`http://3.139.102.236:8888/ticketmasterAPI?zip=`+this.props.zip+`&genreId=${genreString}`);
         fetch(`http://3.139.102.236:8888/ticketmasterAPI?zip=`+this.props.zip+`&genreId=${genreString}`).then(
+=======
+        console.log(`http://localhost:8888/ticketmasterAPI?zip=`+this.props.zip+`&genreId=${genreString}`);
+        fetch(`http://localhost:8888/ticketmasterAPI?zip=`+this.props.zip+`&genreId=${genreString}`).then(
+>>>>>>> b6f78b1abe232cb2064e3e7a2095fae8b2fa6689
             res => res.json()).then(json => {
                 this.setState({
                     loaded: true,
